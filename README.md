@@ -1,4 +1,4 @@
-# Wikit\
+# Wikit
 
 Here’s a **simple, clean, beginner-friendly README** you can drop directly into your repo right now.
 No fluff — just the essentials for Round 2.

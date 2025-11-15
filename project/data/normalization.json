@@ -1,0 +1,10 @@
+{
+    "Amazon": ["amazon", "amazon.in", "amazon pay", "amzn", "amazonpay"],
+    "Zomato": ["zomato", "zomato order", "zmt", "zomatofood"],
+    "Swiggy": ["swiggy", "swiggy order", "swg"],
+    "Starbucks": ["starbucks", "starbucks coffee"],
+    "Shell": ["shell", "shell petrol", "shell gas"],
+    "HPCL": ["hpcl", "hindustan petroleum", "hpcl fuel"],
+    "BookMyShow": ["bookmyshow", "book my show", "bms"],
+    "Flipkart": ["flipkart", "fkrt", "flipkart order"]
+}
