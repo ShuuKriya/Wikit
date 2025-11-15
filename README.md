@@ -150,23 +150,45 @@ streamlit run ui/app.py
 ## **CLI Setup Commands**
 
 
+Say less — I’ll make it clean, minimal, and aesthetic exactly like the first screenshot.
+Below is the README-ready “How to Run” section in that same clean style.
 
-
- Command Reference
-
-This section lists all CLI commands you can run in the current project setup.
-Each command is ready to paste directly into your terminal.
+Copy-paste directly into your README.
 
 ⸻
 
-1. Preprocessing (Clean & Extract Merchant)
+How to Run
 
-Single transaction
-
+1. Install Dependencies
+```
+pip install -r requirements.txt
+```
+2. Train the Model
+```
+python3 project/src/train.py
+```
+3. Run Batch Mode
+```
+python3 project/src/predict.py --batch project/data/test.csv
+```
+4. Run Interactive Mode
+```
+python3 project/src/predict.py --interactive
+```
+5. Predict a Single Transaction
+```
+python3 project/src/predict.py --text "ZOMATO ORDER 129"
+```
+6. Retrain with Feedback
+```
+python3 project/src/retrain.py
+```
+7. Preprocess a Single Transaction
+```
 python3 project/src/preprocess.py --text "AMAZON PAY ORDER 1299"
-
-Multiple samples
-
+```
+8. Preprocess Multiple Transactions
+```
 for t in \
 "ZOMATO ORDER 450" \
 "IRCTC TICKET 1299" \
@@ -176,127 +198,12 @@ for t in \
 do
     python3 project/src/preprocess.py --text "$t"
 done
-
-
-⸻
-
-2. Train the Model (TF-IDF + Logistic Regression)
-
-python3 project/src/train.py
-
-This:
-	•	Loads train.csv + test.csv
-	•	Preprocesses data
-	•	Trains & evaluates model
-	•	Saves model.pkl + vectorizer.pkl to project/model/
+```
+9. Launch UI (if using Streamlit)
+```
+streamlit run project/ui/app.py
+```
 
 ⸻
 
-3. Predict for a Single Input
-
-python3 project/src/predict.py --text "Starbucks Coffee Payment 210"
-
-Outputs:
-	•	cleaned text
-	•	merchant
-	•	predicted category
-	•	confidence
-	•	top tokens
-	•	whether feedback is needed
-
-⸻
-
-4. Batch Prediction (CSV Input)
-
-CSV format:
-
-transaction
-ZOMATO ORDER 450
-SPOTIFY PREM 129
-HPCL PUMP
-
-Run:
-
-python3 project/src/predict.py --batch project/data/test.csv
-
-Output file:
-
-project/data/batch_output.csv
-
-
-⸻
-
-5. Save Manual Feedback (Human-Corrected Labels)
-
-python3 project/src/feedback.py \
-  --text "sbi bank loan premium" \
-  --pred Bills \
-  --correct Bills \
-  --merchant "sbi bank"
-
-Writes to:
-	•	project/data/feedback.csv
-	•	project/data/memory.json
-
-⸻
-
-6. Retrain Using Feedback (Active Learning Loop)
-
-python3 project/src/retrain.py
-
-This updates:
-	•	model
-	•	vectorizer
-	•	evaluation metrics
-
-⸻
-
-7. Generate Synthetic Dataset (Optional)
-
-python3 project/data/gen_data.py
-
-Creates fresh:
-	•	train.csv
-	•	test.csv
-
-⸻
-
-8. View Merchant Normalization Map
-
-cat project/data/normalization.json
-
-
-⸻
-
-9. View Feedback History
-
-cat project/data/feedback.csv
-cat project/data/memory.json
-
-
-⸻
-
-10. Full Pipeline (One-Command)
-
-python3 project/src/train.py && \
-python3 project/src/predict.py --text "ZOMATO ORDER 299" && \
-python3 project/src/predict.py --batch project/data/test.csv
-
-
-⸻
-
-11. Print File Structure (Optional)
-
-Install tree (if missing):
-
-brew install tree
-
-Then:
-
-tree project
-
-
-⸻
-
-
-
+If you want, I can now format your Project Structure section in the same clean style too.
