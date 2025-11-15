@@ -1,9 +1,12 @@
 {
-    "Dining": [],
-    "Shopping": [],
-    "Fuel": [],
-    "Bills": [],
-    "Groceries": [],
-    "Travel": [],
-    "Subscriptions": []
+    "categories": [
+        "Dining",
+        "Shopping",
+        "Fuel",
+        "Groceries",
+        "Bills",
+        "Entertainment",
+        "Travel",
+        "Other"
+    ]
 }

@@ -1,8 +1,4 @@
-# Training script
-
-
 # project/src/train.py
-
 import pandas as pd
 import os
 import joblib
@@ -12,13 +8,14 @@ from sklearn.metrics import classification_report, confusion_matrix
 from preprocess import preprocess_dataframe
 
 # ----------------------------------
-# CONFIG
+# CONFIG (relative to project root)
 # ----------------------------------
-TRAIN_PATH = "/Users/shu/test/Wikit/Wikit/project/data/train.csv"
-TEST_PATH = "/Users/shu/test/Wikit/Wikit/project/data/train.csv"
-NORM_PATH = "/Users/shu/test/Wikit/Wikit/project/data/normalization.json"
+DATA_DIR = "project/data"
+TRAIN_PATH = os.path.join(DATA_DIR, "train.csv")
+TEST_PATH = os.path.join(DATA_DIR, "test.csv")
+NORM_PATH = os.path.join(DATA_DIR, "normalization.json")
 
-MODEL_DIR = "/Users/shu/test/Wikit/Wikit/project/model"
+MODEL_DIR = "project/model"
 MODEL_PATH = os.path.join(MODEL_DIR, "model.pkl")
 VECTORIZER_PATH = os.path.join(MODEL_DIR, "vectorizer.pkl")
 
@@ -28,9 +25,7 @@ LABEL_COL = "category"
 # ----------------------------------
 # TRAINING SCRIPT
 # ----------------------------------
-
 def train_model():
-
     print("Loading dataset...")
     train_df = pd.read_csv(TRAIN_PATH)
     test_df = pd.read_csv(TEST_PATH)
@@ -78,11 +73,17 @@ def train_model():
 
     # show some example predictions
     print("\nSample predictions:")
-    for i in range(5):
+    for i in range(min(5, len(test_df))):
         print(f"Text: {test_df[TEXT_COL].iloc[i]}")
         print(f"Pred : {preds[i]}")
         print("-----")
 
+def load_model_vectorizer():
+    if not os.path.exists(MODEL_PATH) or not os.path.exists(VECTORIZER_PATH):
+        raise FileNotFoundError("Model or vectorizer not found. Please train first.")
+    model = joblib.load(MODEL_PATH)
+    vectorizer = joblib.load(VECTORIZER_PATH)
+    return model, vectorizer
 
 if __name__ == "__main__":
     train_model()
