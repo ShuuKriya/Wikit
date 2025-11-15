@@ -1,110 +1,167 @@
-# Retraining script
-
-
-# project/src/retrain.py
-
-import pandas as pd
 import os
+import json
+import time
 import joblib
-
-from sklearn.feature_extraction.text import TfidfVectorizer
+import numpy as np
+import pandas as pd
+from pathlib import Path
+from datetime import datetime
 from sklearn.linear_model import LogisticRegression
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import classification_report, confusion_matrix
 
 from preprocess import preprocess_dataframe
-from feedback import FEEDBACK_PATH
-
-# -------------------------------
-# CONFIG
-# -------------------------------
-DATA_DIR = "project/data"
-MODEL_DIR = "project/model"
-
-TRAIN_PATH = os.path.join(DATA_DIR, "train.csv")
-TEST_PATH = os.path.join(DATA_DIR, "test.csv")
-NORM_PATH = os.path.join(DATA_DIR, "normalization.json")
-
-MODEL_PATH = os.path.join(MODEL_DIR, "model.pkl")
-VECTORIZER_PATH = os.path.join(MODEL_DIR, "vectorizer.pkl")
-
-TEXT_COL = "transaction"
-LABEL_COL = "category"
-
-# -------------------------------
-# RETRAIN PIPELINE
-# -------------------------------
-
-def load_feedback():
-    """Load user corrections from feedback.csv."""
-    if not os.path.exists(FEEDBACK_PATH):
-        print("No feedback file found. Using only original training data.")
-        return pd.DataFrame(columns=["transaction", "corrected"])
-
-    fb = pd.read_csv(FEEDBACK_PATH)
-    fb = fb.rename(columns={"corrected": "category"})
-    fb = fb[["transaction", "category"]]
-
-    print(f"Loaded {len(fb)} feedback rows.")
-    return fb
 
 
+# ================================
+# Paths
+# ================================
+BASE = Path("project")
+DATA_DIR = BASE / "data"
+MODEL_DIR = BASE / "model"
+EVAL_DIR = BASE / "evaluation"
+
+TRAIN_PATH = DATA_DIR / "train.csv"
+FEEDBACK_PATH = DATA_DIR / "feedback.csv"
+NORM_PATH = DATA_DIR / "normalization.json"
+CONFIG_PATH = BASE / "config.json"
+
+MODEL_PATH = MODEL_DIR / "model.pkl"
+VECTORIZER_PATH = MODEL_DIR / "vectorizer.pkl"
+
+
+# ================================
+# Load Config
+# ================================
+if CONFIG_PATH.exists():
+    config = json.load(open(CONFIG_PATH))
+else:
+    config = {"feedback_sample_weight": 3}
+
+FEEDBACK_WEIGHT = config.get("feedback_sample_weight", 3)
+
+
+# ================================
+# Ensure dirs exist
+# ================================
+MODEL_DIR.mkdir(exist_ok=True)
+EVAL_DIR.mkdir(exist_ok=True)
+
+
+# ================================
+# Train Function
+# ================================
 def retrain():
 
-    print("\n=== LOADING ORIGINAL TRAIN DATA ===")
+    print("\n===============================")
+    print("        RETRAINING MODEL       ")
+    print("===============================\n")
+
+    # ----------------------------------
+    # Load datasets
+    # ----------------------------------
+    print("Loading datasets...")
+
     train_df = pd.read_csv(TRAIN_PATH)
 
-    print("=== LOADING FEEDBACK DATA ===")
-    fb_df = load_feedback()
+    if FEEDBACK_PATH.exists() and os.path.getsize(FEEDBACK_PATH) > 0:
+        fb_df = pd.read_csv(FEEDBACK_PATH)
+    else:
+        fb_df = pd.DataFrame(columns=["transaction", "predicted", "corrected"])
 
-    print("=== MERGING DATASETS ===")
-    full_train = pd.concat([train_df, fb_df], ignore_index=True)
-    full_train = full_train.sample(frac=1).reset_index(drop=True)
-    print(f"Total training rows after merging: {len(full_train)}")
+    print(f"Base training rows  : {len(train_df)}")
+    print(f"Feedback rows       : {len(fb_df)}")
 
-    print("\n=== PREPROCESSING TRAINING DATA ===")
-    full_train = preprocess_dataframe(full_train, text_col=TEXT_COL, norm_table_path=NORM_PATH)
+    # ----------------------------------
+    # Convert feedback to training rows
+    # ----------------------------------
+    if len(fb_df) > 0:
+        fb_train = pd.DataFrame({
+            "transaction": fb_df["transaction"],
+            "category": fb_df["corrected"]
+        })
+    else:
+        fb_train = pd.DataFrame(columns=["transaction", "category"])
 
-    print("=== PREPROCESSING TEST DATA ===")
-    test_df = pd.read_csv(TEST_PATH)
-    test_df = preprocess_dataframe(test_df, text_col=TEXT_COL, norm_table_path=NORM_PATH)
+    # ----------------------------------
+    # Combine base + feedback
+    # ----------------------------------
+    combined_df = pd.concat([train_df, fb_train], ignore_index=True)
+    print(f"Total training rows : {len(combined_df)}")
 
-    # Combine cleaned + normalized merchant for best features
-    X_train_text = (full_train["cleaned_text"].fillna("") + " " +
-                    full_train["merchant_normalized"].fillna(""))
+    # ----------------------------------
+    # Preprocess
+    # ----------------------------------
+    print("Preprocessing text...")
+    combined_df = preprocess_dataframe(
+        combined_df,
+        text_col="transaction",
+        norm_table_path=str(NORM_PATH)
+    )
 
-    X_test_text = (test_df["cleaned_text"].fillna("") + " " +
-                   test_df["merchant_normalized"].fillna(""))
+    full_text = (
+        combined_df["cleaned_text"].fillna("") + " " +
+        combined_df["merchant_normalized"].fillna("")
+    )
+    labels = combined_df["category"]
 
-    y_train = full_train[LABEL_COL]
-    y_test = test_df[LABEL_COL]
+    # ----------------------------------
+    # Apply sample weights
+    # ----------------------------------
+    print(f"Applying feedback weight = {FEEDBACK_WEIGHT}")
 
-    print("\n=== TF-IDF VECTORIZATION ===")
+    base_weights = np.ones(len(train_df))
+    fb_weights = np.ones(len(fb_train)) * FEEDBACK_WEIGHT
+
+    sample_weights = np.concatenate([base_weights, fb_weights])
+
+    # ----------------------------------
+    # Vectorizer
+    # ----------------------------------
+    print("Fitting TF-IDF vectorizer...")
     vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 2))
-    X_train = vectorizer.fit_transform(X_train_text)
-    X_test = vectorizer.transform(X_test_text)
+    X = vectorizer.fit_transform(full_text)
 
-    print("=== RETRAINING MODEL ===")
+    # ----------------------------------
+    # Train model
+    # ----------------------------------
+    print("Training Logistic Regression...")
     model = LogisticRegression(max_iter=2000, n_jobs=-1)
-    model.fit(X_train, y_train)
+    model.fit(X, labels, sample_weight=sample_weights)
 
-    print("\n=== EVALUATING NEW MODEL ===")
-    preds = model.predict(X_test)
-
-    print("\nCLASSIFICATION REPORT:")
-    print(classification_report(y_test, preds))
-
-    print("CONFUSION MATRIX:")
-    print(confusion_matrix(y_test, preds))
-
-    print("\n=== SAVING UPDATED MODEL ===")
-    os.makedirs(MODEL_DIR, exist_ok=True)
+    # ----------------------------------
+    # Save model
+    # ----------------------------------
     joblib.dump(model, MODEL_PATH)
     joblib.dump(vectorizer, VECTORIZER_PATH)
+    print(f"Model saved to:      {MODEL_PATH}")
+    print(f"Vectorizer saved to: {VECTORIZER_PATH}")
 
-    print(f"Saved updated model → {MODEL_PATH}")
-    print(f"Saved updated vectorizer → {VECTORIZER_PATH}")
-    print("\nRetraining complete!")
+    # ----------------------------------
+    # Evaluate on *TRAIN* (or optionally use validation split)
+    # ----------------------------------
+    print("\nEvaluating model...")
+
+    preds = model.predict(X)
+    report = classification_report(labels, preds, output_dict=True)
+    conf_matrix = confusion_matrix(labels, preds)
+
+    metrics = {
+        "timestamp": datetime.utcnow().isoformat(),
+        "macro_f1": report["macro avg"]["f1-score"],
+        "classification_report": report,
+        "confusion_matrix": conf_matrix.tolist()
+    }
+
+    json.dump(metrics, open(EVAL_DIR / "metrics_report.json", "w"), indent=4)
+    print("Saved metrics → evaluation/metrics_report.json")
+
+    print("\nMacro F1:", report["macro avg"]["f1-score"])
+    print("Retraining complete!\n")
 
 
+# ================================
+# CLI
+# ================================
 if __name__ == "__main__":
     retrain()

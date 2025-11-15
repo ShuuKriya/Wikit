@@ -1,47 +1,124 @@
 # Evaluation script
 # project/src/evaluate.py
-import pandas as pd
+
+
+
+# project/src/evaluate.py
+
 import os
-from sklearn.metrics import classification_report, confusion_matrix
-from preprocess import preprocess_dataframe
+import json
 import joblib
+import numpy as np
+import pandas as pd
+from pathlib import Path
+from sklearn.metrics import classification_report, confusion_matrix
+import matplotlib.pyplot as plt
 
-DATA_DIR = "project/data"
-TEST_PATH = os.path.join(DATA_DIR, "test.csv")
-NORM_PATH = os.path.join(DATA_DIR, "normalization.json")
-MODEL_DIR = "project/model"
-MODEL_PATH = os.path.join(MODEL_DIR, "model.pkl")
-VECTORIZER_PATH = os.path.join(MODEL_DIR, "vectorizer.pkl")
+from preprocess import preprocess_dataframe
 
-def evaluate():
-    if not os.path.exists(MODEL_PATH) or not os.path.exists(VECTORIZER_PATH):
-        raise FileNotFoundError("Model/vectorizer missing. Train first.")
+# -----------------------------
+# PATHS
+# -----------------------------
+BASE = Path("project")
+MODEL_PATH = BASE / "model/model.pkl"
+VEC_PATH = BASE / "model/vectorizer.pkl"
+TEST_PATH = BASE / "data/test.csv"
+TAX_PATH = BASE / "data/taxonomy.json"
+NORM_PATH = BASE / "data/normalization.json"
 
-    model = joblib.load(MODEL_PATH)
-    vectorizer = joblib.load(VECTORIZER_PATH)
+OUT_JSON = BASE / "evaluation/metrics_report.json"
+OUT_CM = BASE / "evaluation/confusion_matrix.png"
 
-    print("Loading test set...")
-    test_df = pd.read_csv(TEST_PATH)
+os.makedirs(BASE / "evaluation", exist_ok=True)
 
-    print("Preprocessing test set...")
-    test_df = preprocess_dataframe(test_df, text_col="transaction", norm_table_path=NORM_PATH)
 
-    X_test_text = (test_df["cleaned_text"].fillna("") + " " + test_df["merchant_normalized"].fillna(""))
-    y_true = test_df["category"]
+# -----------------------------
+# LOAD MODEL + VECTORIZER
+# -----------------------------
+model = joblib.load(MODEL_PATH)
+vectorizer = joblib.load(VEC_PATH)
 
-    X_test = vectorizer.transform(X_test_text)
-    preds = model.predict(X_test)
+# -----------------------------
+# Load taxonomy
+# -----------------------------
+taxonomy = json.load(open(TAX_PATH))
 
-    print("\n=== CLASSIFICATION REPORT ===\n")
-    print(classification_report(y_true, preds))
 
-    print("\n=== CONFUSION MATRIX ===\n")
-    print(confusion_matrix(y_true, preds))
+# -----------------------------
+# Softmax
+# -----------------------------
+def softmax(x):
+    e = np.exp(x - np.max(x))
+    return e / e.sum()
 
-    # Basic bias/robustness hooks (counts by category)
-    counts = test_df["category"].value_counts()
-    print("\nCategory distribution in test set:")
-    print(counts)
+
+# -----------------------------
+# PREDICT FUNCTION
+# -----------------------------
+def predict_batch(cleaned_texts):
+    X = vectorizer.transform(cleaned_texts)
+    logits = model.decision_function(X)
+    preds = np.argmax(logits, axis=1)
+    labels = model.classes_[preds]
+    return labels
+
+
+# -----------------------------
+# MAIN EVALUATION PIPELINE
+# -----------------------------
+def run_evaluation():
+    print("Loading test dataset...")
+    df = pd.read_csv(TEST_PATH)
+
+    if "transaction" not in df.columns or "category" not in df.columns:
+        raise ValueError("test.csv must contain 'transaction' and 'category' columns")
+
+    print("Preprocessing...")
+    df = preprocess_dataframe(df, text_col="transaction", norm_table_path=NORM_PATH)
+
+    combined = (df["cleaned_text"].fillna("") + " " +
+                df["merchant_normalized"].fillna(""))
+
+    print("Running predictions...")
+    preds = predict_batch(combined)
+    true = df["category"]
+
+    print("Generating metrics...")
+
+    report = classification_report(true, preds, output_dict=True)
+    cm = confusion_matrix(true, preds)
+    labels = sorted(list(set(true)))
+
+    # Save JSON
+    with open(OUT_JSON, "w") as f:
+        json.dump({
+            "classification_report": report,
+            "classes": labels
+        }, f, indent=4)
+
+    print(f"Saved metrics JSON → {OUT_JSON}")
+
+    # Save Confusion Matrix Image
+    plt.figure(figsize=(8, 6))
+    plt.imshow(cm, cmap="Blues")
+    plt.title("Confusion Matrix")
+    plt.colorbar()
+    plt.xticks(ticks=range(len(labels)), labels=labels, rotation=45)
+    plt.yticks(ticks=range(len(labels)), labels=labels)
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+
+    for i in range(len(labels)):
+        for j in range(len(labels)):
+            plt.text(j, i, cm[i, j], ha="center", va="center")
+
+    plt.tight_layout()
+    plt.savefig(OUT_CM)
+    plt.close()
+
+    print(f"Saved confusion matrix → {OUT_CM}")
+    print("\n=== DONE ===")
+
 
 if __name__ == "__main__":
-    evaluate()
+    run_evaluation()

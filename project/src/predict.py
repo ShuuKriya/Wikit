@@ -106,6 +106,44 @@ def predict_single(text: str, is_batch=False):
         "top_tokens": top_tokens
     }
 
+def explain_prediction(model, vectorizer, cleaned_text, merchant, combined_text):
+    """
+    Returns dict: token → {coef_weight, perturb_impact, combined_score}
+    """
+    feature_names = vectorizer.get_feature_names_out()
+
+    # Baseline prediction
+    X = vectorizer.transform([combined_text])
+    logits = model.decision_function(X)[0]
+    base_conf = softmax(logits)[np.argmax(logits)]
+
+    explanation = {}
+
+    tokens = cleaned_text.split()
+    tokens = [t for t in tokens if t.strip()]
+
+    for tok in tokens:
+        if tok in feature_names:
+            idx = np.where(feature_names == tok)[0][0]
+            coef_weight = float(model.coef_[np.argmax(logits)][idx])
+        else:
+            coef_weight = 0.0
+
+        # perturbation → remove token
+        perturbed = " ".join([t for t in tokens if t != tok])
+        X_pert = vectorizer.transform([perturbed])
+        logits_pert = model.decision_function(X_pert)[0]
+        pert_conf = softmax(logits_pert)[np.argmax(logits_pert)]
+
+        impact = float(pert_conf - base_conf)
+
+        explanation[tok] = {
+            "coef_weight": round(coef_weight, 4),
+            "perturbation_impact": round(impact, 4),
+            "combined_score": round(coef_weight + impact, 4)
+        }
+
+    return explanation
 # -------------------------------
 # Batch CSV prediction
 # -------------------------------
