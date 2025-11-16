@@ -99,6 +99,7 @@ Token-level insights including:
 
 # Project Structure
 
+
 Wikit/
 │
 ├── project/
@@ -109,8 +110,15 @@ Wikit/
 │   │   ├── preprocess.py
 │   │   ├── predict.py
 │   │   ├── feedback.py
+│   │   ├── explain.py
+│   │   ├── performance.py
+│   │   ├── robustness.py
+│   │   ├── taxonomy.py
+│   │   └── utils.py
 │   │
 │   ├── ui/
+│   │   ├── .streamlit/
+│   │   │   └── config.toml
 │   │   └── app.py
 │   │
 │   ├── model/
@@ -127,14 +135,33 @@ Wikit/
 │   │
 │   ├── evaluation/
 │   │   ├── metrics_report.json
-│   │   └── confusion_matrix.png
+│   │   ├── confusion_matrix.png
+│   │   ├── performance_report.json
+│   │   └── robustness_report.json
 │   │
 │   ├── config.json
 │   └── README.md
 │
-└── requirements.txt
+├── docs/
+│   ├── architecture.md
+│   ├── dataset.md
+│   ├── training_pipeline.md
+│   ├── model.md
+│   ├── explainability.md
+│   ├── feedback_loop.md
+│   ├── evaluation.md
+│   └── ui.md
+│
+├── requirements.txt
+└── README.md
 
----
+
+
+
+⸻
+
+
+
 
 # Running the App
 
