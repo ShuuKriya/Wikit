@@ -9,44 +9,44 @@ Evaluating on test set...
 
                precision    recall  f1-score   support
 
-        Bills       1.00      1.00      1.00        60
-       Dining       1.00      1.00      1.00        62
-Entertainment       1.00      1.00      1.00        58
-         Fuel       1.00      1.00      1.00        57
-    Groceries       1.00      0.98      0.99        61
-     Shopping       0.98      1.00      0.99        61
-       Travel       1.00      1.00      1.00        59
+        Bills       0.94      1.00      0.97        46
+       Dining       0.92      0.90      0.91        52
+Entertainment       1.00      0.85      0.92        60
+         Fuel       1.00      0.83      0.91        41
+    Groceries       0.86      0.98      0.92        52
+     Shopping       0.89      0.98      0.93        55
+       Travel       0.94      0.96      0.95        46
 
-     accuracy                           1.00       418
-    macro avg       1.00      1.00      1.00       418
- weighted avg       1.00      1.00      1.00       418
+     accuracy                           0.93       352
+    macro avg       0.94      0.93      0.93       352
+ weighted avg       0.93      0.93      0.93       352
 
 Confusion Matrix:
-[[60  0  0  0  0  0  0]
- [ 0 62  0  0  0  0  0]
- [ 0  0 58  0  0  0  0]
- [ 0  0  0 57  0  0  0]
- [ 0  0  0  0 60  1  0]
- [ 0  0  0  0  0 61  0]
- [ 0  0  0  0  0  0 59]]
+[[46  0  0  0  0  0  0]
+ [ 0 47  0  0  4  0  1]
+ [ 1  2 51  0  1  5  0]
+ [ 2  0  0 34  2  1  2]
+ [ 0  0  0  0 51  1  0]
+ [ 0  1  0  0  0 54  0]
+ [ 0  1  0  0  1  0 44]]
 Saving model + vectorizer...
 
-Model saved to: /Users/shu/test/Wikit/Wikit/project/model/model.pkl
-Vectorizer saved to: /Users/shu/test/Wikit/Wikit/project/model/vectorizer.pkl
+Model saved to: project/model/model.pkl
+Vectorizer saved to: project/model/vectorizer.pkl
 
 Sample predictions:
-Text: - BLR CROMA STORE*ORDER #
-Pred : Shopping
------
-Text: TXN ID  NATURES BASKET
+Text: *ORDER # FRESHTOHOME *ONLINE
 Pred : Groceries
 -----
-Text: HOTSTAR PLAN 1299.00 INR
+Text: #88324 NYKAA PAYMENT PAYMENT
+Pred : Shopping
+-----
+Text: Ticketmaster Concert Ticket Purchase
 Pred : Entertainment
 -----
-Text: - MUMBAI AIRTEL POSTPAID @OKICICI
-Pred : Bills
+Text: UPI@YBL CROMA STORE
+Pred : Shopping
 -----
-Text: 450.00 ACT BROADBAND
-Pred : Bills
+Text: Zoo Ticket Purchase for Family
+Pred : Entertainment
 -----

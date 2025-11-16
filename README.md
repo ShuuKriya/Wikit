@@ -1,209 +1,213 @@
-# Wikit
 
-Here’s a **simple, clean, beginner-friendly README** you can drop directly into your repo right now.
-No fluff — just the essentials for Round 2.
+# WIKIT — AI-Based Financial Transaction Categorisation  
+**Local, explainable, customisable ML pipeline for classifying raw financial transaction strings.**
 
----
+WIKIT is a fully in-house machine learning system that converts messy transaction text  
+(e.g., `"AMAZON PAY *ORDER"`, `"SWIGGY * FOOD"`, `"HP PETROL PUMP"`)  
+into clean, meaningful financial categories like **Groceries**, **Dining**, **Fuel**, etc.
 
-# **README**
-
-## **AI-Based Financial Transaction Categorization System**
-
-This project is an in-house AI system that automatically classifies financial transaction text (e.g., `"ZOMATO *ORDER #392847"`) into meaningful categories such as **Dining**, **Shopping**, **Fuel**, etc.
-The system does **not rely on any third-party APIs** and is fully customizable, explainable, and self-learning.
-
----
-
-## **Features**
-
-* **End-to-end autonomous categorization**
-* **Customizable taxonomy** (via `taxonomy.json`)
-* **Batch mode** for large datasets
-* **Interactive mode** with human-in-the-loop feedback
-* **Explainable outputs** (confidence scores + top keyword indicators)
-* **Self-learning pipeline** using feedback data (`feedback.csv`)
-* **Retrainable model** using simple retraining scripts
+No external APIs.  
+No recurring billing.  
+No vendor lock-in.  
+Just **your own classifier**, fast and transparent.
 
 ---
 
-## **Current Tech Stack**
+#  Features
 
-* **Python**
-* **scikit-learn** (TF-IDF + Logistic Regression)
-* **pandas / numpy**
-* **Streamlit** (UI)
-* **JSON / CSV** for configuration & data
+### ** AI-Powered Transaction Categorisation**
+- Logistic Regression + TF-IDF  
+- Cleaned + merchant-normalised features  
+- Confidence scoring for every prediction  
+
+### ** Evaluation & Metrics**
+- Macro F1: **0.93**  
+- Accuracy: **0.93**  
+- Per-class F1: **0.91–0.97**  
+- Confusion matrix + classification report included  
+
+### ** Data Preprocessing Pipeline**
+- Text cleaning  
+- Merchant normalisation  
+- Noise/stopword reduction  
+- Normalisation rules configurable via JSON  
+
+### ** Admin Tools**
+- Modify taxonomy (add/remove categories)  
+- Change confidence thresholds  
+- Inspect or clear merchant memory  
+- Review and clear feedback.csv  
+
+### ** Human-in-the-loop Feedback**
+- Low-confidence predictions automatically highlight feedback section  
+- User corrections go into:
+  - `feedback.csv`
+  - `memory.json` (merchant→category mapping)
+
+### ** Model Retraining (One Click)**
+- Merges base training data + feedback  
+- Reweights feedback samples  
+- Retrains LR model  
+- Updates model + vectorizer live  
+- Triggered via **Refresh** tab in UI  
+
+### ** Explainability**
+Token-level explanations showing:
+- coefficient influence  
+- perturbation sensitivity  
+- combined impact score with progress bars  
+
+### ** Batch Mode**
+- Upload CSV  
+- Vectorised inference  
+- Configurable low-confidence handling  
+- Download results CSV  
+
+### ** UI**
+- Built with Streamlit  
+- Custom dark-blue theme  
+- Clean, minimal, production-style layout  
 
 ---
 
-## **Model Overview**
+# 🔧 Technology Stack
 
-1. Preprocessing
-
-   * Regex cleaning
-   * Tokenization
-   * Merchant name normalization
-
-2. Feature Extraction
-
-   * TF-IDF Vectorizer
-     *(Future upgrade: MiniLM / SBERT embeddings)*
-
-3. Model
-
-   * Logistic Regression
-     *(Future upgrade: MLP for richer patterns)*
-
-4. Confidence Evaluation
-
-   * Softmax probability threshold
-   * Low-confidence → ask user / mark as “Other”
-
-5. Feedback Loop
-
-   * User corrections saved to `feedback.csv`
-   * Combined into training during retraining
+| Component | Tech |
+|----------|------|
+| Preprocessing | Python, regex, custom merchant normaliser |
+| Model | Logistic Regression (scikit-learn) |
+| Vectoriser | TF-IDF (unigram + bigram, 5000 max features) |
+| UI | Streamlit |
+| Storage | JSON + CSV |
+| Evaluation | scikit-learn + matplotlib |
 
 ---
 
-## **Project Structure**
+#  Project Structure
 
-```
-project/
+Wikit/
 │
-├── data/
-│   ├── train.csv
-│   ├── test.csv
-│   ├── feedback.csv
-│   ├── taxonomy.json
-│   └── memory.json
+├── project/
+│   ├── src/
+│   │   ├── train.py
+│   │   ├── retrain.py
+│   │   ├── evaluate.py
+│   │   ├── preprocess.py
+│   │   ├── predict.py
+│   │   ├── feedback.py
+│   │
+│   ├── ui/
+│   │   └── app.py
+│   │
+│   ├── model/
+│   │   ├── model.pkl
+│   │   └── vectorizer.pkl
+│   │
+│   ├── data/
+│   │   ├── train.csv
+│   │   ├── test.csv
+│   │   ├── normalization.json
+│   │   ├── taxonomy.json
+│   │   ├── memory.json
+│   │   └── feedback.csv
+│   │
+│   ├── evaluation/
+│   │   ├── metrics_report.json
+│   │   └── confusion_matrix.png
+│   │
+│   ├── config.json
+│   └── README.md
 │
-├── model/
-│   ├── model.pkl
-│   └── vectorizer.pkl
-│
-├── src/
-│   ├── preprocess.py
-│   ├── train.py
-│   ├── predict.py
-│   ├── evaluate.py
-│   ├── retrain.py
-│   ├── feedback.py
-│   └── utils.py
-│
-└── ui/
-    └── app.py
-```
+└── requirements.txt
 
 ---
 
-## **How to Run**
+#  Running the App
 
-### 1. Install Dependencies
+Install dependencies:
 
-```
+```bash
 pip install -r requirements.txt
-```
 
-### 2. Train the Model
+Launch Streamlit UI:
 
-```
-python src/train.py
-```
-
-### 3. Run Batch Mode
-
-```
-python src/predict.py --batch data/test.csv
-```
-
-### 4. Run Interactive Mode
-
-```
-python src/predict.py --interactive
-```
-
-### 5. Retrain with Feedback
-
-```
-python src/retrain.py
-```
-
-### 6. Launch UI
-
-```
-streamlit run ui/app.py
-```
-
----
-
-## **Next Steps**
-
-* Add explainability UI with SHAP/LIME
-* Add bias and fairness testing
-* Upgrade to embeddings + MLP model
-* Improve robustness to noisy inputs
-* Add automated retraining triggers
-
----
-
-## **CLI Setup Commands**
-
-
-Say less — I’ll make it clean, minimal, and aesthetic exactly like the first screenshot.
-Below is the README-ready “How to Run” section in that same clean style.
-
-Copy-paste directly into your README.
-
-⸻
-
-How to Run
-
-1. Install Dependencies
-```
-pip install -r requirements.txt
-```
-2. Train the Model
-```
-python3 project/src/train.py
-```
-3. Run Batch Mode
-```
-python3 project/src/predict.py --batch project/data/test.csv
-```
-4. Run Interactive Mode
-```
-python3 project/src/predict.py --interactive
-```
-5. Predict a Single Transaction
-```
-python3 project/src/predict.py --text "ZOMATO ORDER 129"
-```
-6. Retrain with Feedback
-```
-python3 project/src/retrain.py
-```
-7. Preprocess a Single Transaction
-```
-python3 project/src/preprocess.py --text "AMAZON PAY ORDER 1299"
-```
-8. Preprocess Multiple Transactions
-```
-for t in \
-"ZOMATO ORDER 450" \
-"IRCTC TICKET 1299" \
-"HPCL PETROL PUMP" \
-"SPOTIFY PREMIUM PLAN" \
-"FLIPKART ORDER ID 2344"
-do
-    python3 project/src/preprocess.py --text "$t"
-done
-```
-9. Launch UI (if using Streamlit)
-```
 streamlit run project/ui/app.py
-```
+
 
 ⸻
 
-If you want, I can now format your Project Structure section in the same clean style too.
+ Re-training
+
+python3 project/src/train.py
+
+Human-feedback based retraining:
+
+python3 project/src/retrain.py
+
+
+⸻
+
+ Evaluation
+
+python3 project/src/evaluate.py
+
+Outputs:
+	•	evaluation/metrics_report.json
+	•	evaluation/confusion_matrix.png
+
+⸻
+
+ Dataset Summary
+
+Total samples: 1000
+
+Train Set (650 samples)
+
+Entertainment    104
+Groceries         98
+Dining            96
+Travel            93
+Shopping          91
+Bills             88
+Fuel              81
+
+Test Set (352 samples)
+
+Entertainment    60
+Shopping         55
+Groceries        52
+Dining           52
+Travel           46
+Bills            46
+Fuel             41
+
+
+⸻
+
+ Performance Summary
+	•	Macro F1: 0.93
+	•	Accuracy: 0.93
+	•	Latency: 0.12 ms / prediction
+	•	Throughput: 8300+ predictions/second
+	•	Explainability: token-level contributions
+
+⸻
+
+ Demo Requirements (PS Guidelines)
+
+This solution covers:
+
+✔ End-to-end pipeline
+✔ Evaluation with reproducible metrics
+✔ Customisable taxonomy
+✔ Explainability
+✔ Human feedback loop
+✔ Batch inference
+✔ Model retraining
+✔ Real + synthetic data usage
+
+⸻
+
+ Acknowledgements
+
+Developed by Shuu with ML engineering support from Smile 🫶

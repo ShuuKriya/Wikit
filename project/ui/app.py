@@ -149,8 +149,8 @@ def predict_batch(df: pd.DataFrame):
 # Streamlit UI Layout
 # -----------------------
 st.set_page_config(page_title="WIKIT Classifier", page_icon="💸", layout="wide")
-st.title(" Wikit Transaction Classifier")
-st.caption("In-house transaction categorisation — single, batch, and admin tools")
+st.title(" Transify ")
+st.caption("Making classifying transactions easier")
 
 tabs = st.tabs([
     "Single Prediction",
@@ -536,4 +536,4 @@ with tabs[3]:
 # Footer
 # -----------------------
 st.markdown("---")
-st.caption("Wikit — local, explainable transaction categorisation. Built for Round 2.")
+st.caption("Team Name : Wikit , Members : Nishant Bidhu and Swati Nim")
