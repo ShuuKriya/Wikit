@@ -278,7 +278,11 @@ with tabs[0]:
                     st.success("Feedback saved and memory updated.")
 
             elif correct == "Yes":
-                st.success("Nice — model seems right.")
+                if out["needs_feedback"]:
+                    st.info("Thanks! Since the model was low-confidence but correct, no correction is needed. "
+                            "The model will improve naturally during normal retraining.")
+                else:
+                    st.success("Nice — model seems right.")
 
 # -----------------------
 # Tab 2: Batch Mode

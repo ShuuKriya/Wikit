@@ -1,6 +1,6 @@
 {
-    "avg_latency_ms": 0.12278556823730469,
-    "throughput_predictions_per_sec": 8191.870969774292,
-    "batch_inference_time_ms": 0.518798828125,
-    "num_samples": 124
+    "avg_latency_ms": 0.12001514434814453,
+    "throughput_predictions_per_sec": 8376.804321183787,
+    "batch_inference_time_ms": 1.0957717895507812,
+    "num_samples": 352
 }

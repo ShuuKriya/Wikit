@@ -6,7 +6,7 @@
 - Performance file: `evaluation/performance_report.json`
 - Robustness file: `evaluation/robustness_report.json`
 
-**Macro F1 (from metrics):** `0.9594182546273139`
+**Macro F1 (from metrics):** `0.9289739940368272`
 
 ## Metrics (summary)
 
@@ -15,59 +15,59 @@
 ```json
 {
   "Bills": {
-    "precision": 1.0,
+    "precision": 0.9387755102040817,
     "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 17.0
+    "f1-score": 0.968421052631579,
+    "support": 46.0
   },
   "Dining": {
-    "precision": 0.9444444444444444,
-    "recall": 1.0,
-    "f1-score": 0.9714285714285714,
-    "support": 17.0
+    "precision": 0.9215686274509803,
+    "recall": 0.9038461538461539,
+    "f1-score": 0.912621359223301,
+    "support": 52.0
   },
   "Entertainment": {
     "precision": 1.0,
-    "recall": 0.7777777777777778,
-    "f1-score": 0.875,
-    "support": 18.0
+    "recall": 0.85,
+    "f1-score": 0.918918918918919,
+    "support": 60.0
   },
   "Fuel": {
     "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 18.0
+    "recall": 0.8292682926829268,
+    "f1-score": 0.9066666666666666,
+    "support": 41.0
   },
   "Groceries": {
-    "precision": 1.0,
-    "recall": 0.9473684210526315,
-    "f1-score": 0.972972972972973,
-    "support": 19.0
+    "precision": 0.864406779661017,
+    "recall": 0.9807692307692307,
+    "f1-score": 0.918918918918919,
+    "support": 52.0
   },
   "Shopping": {
-    "precision": 0.8636363636363636,
-    "recall": 1.0,
-    "f1-score": 0.926829268292683,
-    "support": 19.0
+    "precision": 0.8852459016393442,
+    "recall": 0.9818181818181818,
+    "f1-score": 0.9310344827586207,
+    "support": 55.0
   },
   "Travel": {
-    "precision": 0.9411764705882353,
-    "recall": 1.0,
-    "f1-score": 0.9696969696969697,
-    "support": 16.0
+    "precision": 0.9361702127659575,
+    "recall": 0.9565217391304348,
+    "f1-score": 0.946236559139785,
+    "support": 46.0
   },
-  "accuracy": 0.9596774193548387,
+  "accuracy": 0.9289772727272727,
   "macro avg": {
-    "precision": 0.9641796112384348,
-    "recall": 0.9607351712614871,
-    "f1-score": 0.9594182546273139,
-    "support": 124.0
+    "precision": 0.9351667188173401,
+    "recall": 0.9288890854638467,
+    "f1-score": 0.9289739940368272,
+    "support": 352.0
   },
   "weighted avg": {
-    "precision": 0.9638989515649857,
-    "recall": 0.9596774193548387,
-    "f1-score": 0.9586748372055216,
-    "support": 124.0
+    "precision": 0.9341100824335501,
+    "recall": 0.9289772727272727,
+    "f1-score": 0.928493493253042,
+    "support": 352.0
   }
 }
 ```
@@ -76,10 +76,10 @@
 
 ```json
 {
-  "avg_latency_ms": 0.12278556823730469,
-  "throughput_predictions_per_sec": 8191.870969774292,
-  "batch_inference_time_ms": 0.518798828125,
-  "num_samples": 124
+  "avg_latency_ms": 0.12001514434814453,
+  "throughput_predictions_per_sec": 8376.804321183787,
+  "batch_inference_time_ms": 1.0957717895507812,
+  "num_samples": 352
 }
 ```
 
@@ -95,83 +95,103 @@
 
 ## Example Explainability Outputs
 
-### Input: `HOTSTAR PLAN#88324`
-- Prediction: **Entertainment**
-- Confidence: `0.6716149398313628`
-```json
-{
-  "hotstar": {
-    "coef_weight": 1.7167,
-    "perturbation_impact": 0.0739,
-    "combined_score": 1.7906
-  },
-  "plan": {
-    "coef_weight": 1.0006,
-    "perturbation_impact": 0.1546,
-    "combined_score": 1.1552
-  }
-}
-```
-### Input: `ZOMATO ORDER`
-- Prediction: **Dining**
-- Confidence: `0.7185251121456437`
-```json
-{
-  "zomato": {
-    "coef_weight": 2.2904,
-    "perturbation_impact": -0.0262,
-    "combined_score": 2.2642
-  }
-}
-```
-### Input: `NATURES BASKET`
+### Input: `*ORDER # FRESHTOHOME *ONLINE`
 - Prediction: **Groceries**
-- Confidence: `0.6507912316881559`
+- Confidence: `0.57246141015095`
 ```json
 {
-  "natures": {
-    "coef_weight": 1.1215,
-    "perturbation_impact": 0.0548,
-    "combined_score": 1.1763
-  },
-  "basket": {
-    "coef_weight": 1.2497,
-    "perturbation_impact": 0.0887,
-    "combined_score": 1.3384
+  "freshtohome": {
+    "coef_weight": 2.3005,
+    "perturbation_impact": 0.5176,
+    "combined_score": 2.8181
   }
 }
 ```
-### Input: `TXN ID  STARBUCKS COFFEE PAYMENT`
-- Prediction: **Dining**
-- Confidence: `0.45358896302781043`
+### Input: `#88324 NYKAA PAYMENT PAYMENT`
+- Prediction: **Shopping**
+- Confidence: `0.46770412799356315`
 ```json
 {
-  "starbucks": {
-    "coef_weight": 1.6043,
-    "perturbation_impact": 0.2584,
-    "combined_score": 1.8627
-  },
-  "coffee": {
-    "coef_weight": 1.1937,
-    "perturbation_impact": 0.1335,
-    "combined_score": 1.3272
+  "nykaa": {
+    "coef_weight": 2.4137,
+    "perturbation_impact": 0.7058,
+    "combined_score": 3.1195
   }
 }
 ```
-### Input: `*ORDER # ACT BROADBAND`
-- Prediction: **Bills**
-- Confidence: `0.562235518778885`
+### Input: `Ticketmaster Concert Ticket Purchase`
+- Prediction: **Entertainment**
+- Confidence: `0.4754209742308543`
 ```json
 {
-  "act": {
-    "coef_weight": 1.2113,
-    "perturbation_impact": 0.2315,
-    "combined_score": 1.4428
+  "ticketmaster": {
+    "coef_weight": 0.8303,
+    "perturbation_impact": -0.035,
+    "combined_score": 0.7953
   },
-  "broadband": {
-    "coef_weight": 1.2951,
-    "perturbation_impact": 0.2554,
-    "combined_score": 1.5505
+  "concert": {
+    "coef_weight": 0.5782,
+    "perturbation_impact": -0.0531,
+    "combined_score": 0.5251
+  },
+  "ticket": {
+    "coef_weight": 1.3409,
+    "perturbation_impact": 0.0778,
+    "combined_score": 1.4187
+  },
+  "purchase": {
+    "coef_weight": -0.1511,
+    "perturbation_impact": 0.014,
+    "combined_score": -0.1371
+  }
+}
+```
+### Input: `UPI@YBL CROMA STORE`
+- Prediction: **Shopping**
+- Confidence: `0.4724810882087993`
+```json
+{
+  "croma": {
+    "coef_weight": 1.4471,
+    "perturbation_impact": 0.3101,
+    "combined_score": 1.7572
+  },
+  "store": {
+    "coef_weight": 1.1299,
+    "perturbation_impact": 0.2057,
+    "combined_score": 1.3356
+  }
+}
+```
+### Input: `Zoo Ticket Purchase for Family`
+- Prediction: **Entertainment**
+- Confidence: `0.38639183968417967`
+```json
+{
+  "zoo": {
+    "coef_weight": 0.3223,
+    "perturbation_impact": -0.0354,
+    "combined_score": 0.2869
+  },
+  "ticket": {
+    "coef_weight": 1.3409,
+    "perturbation_impact": 0.0991,
+    "combined_score": 1.44
+  },
+  "purchase": {
+    "coef_weight": -0.1511,
+    "perturbation_impact": 0.0173,
+    "combined_score": -0.1338
+  },
+  "for": {
+    "coef_weight": -0.272,
+    "perturbation_impact": -0.0045,
+    "combined_score": -0.2765
+  },
+  "family": {
+    "coef_weight": 0.3794,
+    "perturbation_impact": 0.0232,
+    "combined_score": 0.4026
   }
 }
 ```

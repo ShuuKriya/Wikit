@@ -1,5 +1,5 @@
 {
-    "confidence_threshold": 0.40,
+    "confidence_threshold": 0.4,
     "batch_low_confidence_behavior": "other",
     "interactive_low_confidence": true
 }
