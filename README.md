@@ -83,6 +83,18 @@ Token-level explanations showing:
 
 ---
 
+# Documentation  
+- docs/architecture.md  
+- docs/dataset.md  
+- docs/training_pipeline.md  
+- docs/model.md  
+- docs/explainability.md  
+- docs/feedback_loop.md  
+- docs/evaluation.md  
+- docs/ui.md
+
+---
+
 #  Project Structure
 
 Wikit/
@@ -210,4 +222,5 @@ This solution covers:
 
  Acknowledgements
 
-Developed by Shuu with ML engineering support from Smile 🫶
+Developed by Nishant Bidhu and Swati Nim
+Developed for AnitaB.org India GHCI 25 Hackathon
