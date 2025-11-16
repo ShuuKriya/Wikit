@@ -1,6 +1,7 @@
 
-# WIKIT — AI-Based Financial Transaction Categorisation  
-**Local, explainable, customisable ML pipeline for classifying raw financial transaction strings.**
+
+# WIKIT — AI-Based Financial Transaction Categorisation
+Local, explainable, customisable ML pipeline for classifying raw financial transaction strings.
 
 WIKIT is a fully in-house machine learning system that converts messy transaction text  
 (e.g., `"AMAZON PAY *ORDER"`, `"SWIGGY * FOOD"`, `"HP PETROL PUMP"`)  
@@ -9,93 +10,94 @@ into clean, meaningful financial categories like **Groceries**, **Dining**, **Fu
 No external APIs.  
 No recurring billing.  
 No vendor lock-in.  
-Just **your own classifier**, fast and transparent.
+Just your own classifier — fast, transparent, fully local.
 
 ---
 
-#  Features
+# Features
 
-### ** AI-Powered Transaction Categorisation**
+### AI-Powered Transaction Categorisation
 - Logistic Regression + TF-IDF  
 - Cleaned + merchant-normalised features  
 - Confidence scoring for every prediction  
 
-### ** Evaluation & Metrics**
+### Evaluation & Metrics
 - Macro F1: **0.93**  
 - Accuracy: **0.93**  
 - Per-class F1: **0.91–0.97**  
 - Confusion matrix + classification report included  
 
-### ** Data Preprocessing Pipeline**
+### Data Preprocessing Pipeline
 - Text cleaning  
 - Merchant normalisation  
-- Noise/stopword reduction  
-- Normalisation rules configurable via JSON  
+- Noise reduction  
+- All rules configurable via JSON  
 
-### ** Admin Tools**
+### Admin Tools
 - Modify taxonomy (add/remove categories)  
 - Change confidence thresholds  
 - Inspect or clear merchant memory  
-- Review and clear feedback.csv  
+- Review and clear feedback CSV  
 
-### ** Human-in-the-loop Feedback**
-- Low-confidence predictions automatically highlight feedback section  
-- User corrections go into:
+### Human-in-the-loop Feedback
+- Low-confidence predictions highlight feedback
+- User corrections populate:
   - `feedback.csv`
-  - `memory.json` (merchant→category mapping)
+  - `memory.json` (merchant→category overrides)
 
-### ** Model Retraining (One Click)**
-- Merges base training data + feedback  
+### Model Retraining (One Click)
+- Merges base training data + feedback samples  
 - Reweights feedback samples  
 - Retrains LR model  
-- Updates model + vectorizer live  
+- Updates model + vectorizer  
 - Triggered via **Refresh** tab in UI  
 
-### ** Explainability**
-Token-level explanations showing:
+### Explainability
+Token-level insights including:
 - coefficient influence  
 - perturbation sensitivity  
-- combined impact score with progress bars  
+- combined impact score with UI bars  
 
-### ** Batch Mode**
+### Batch Mode
 - Upload CSV  
 - Vectorised inference  
-- Configurable low-confidence handling  
-- Download results CSV  
+- Optional low-confidence → “Other” routing  
+- Downloadable results CSV  
 
-### ** UI**
-- Built with Streamlit  
+### UI
+- Streamlit  
 - Custom dark-blue theme  
-- Clean, minimal, production-style layout  
+- Clean production-style layout  
 
 ---
 
-# 🔧 Technology Stack
+# Technology Stack
 
 | Component | Tech |
 |----------|------|
-| Preprocessing | Python, regex, custom merchant normaliser |
+| Preprocessing | Python, regex, merchant normaliser |
 | Model | Logistic Regression (scikit-learn) |
-| Vectoriser | TF-IDF (unigram + bigram, 5000 max features) |
+| Vectoriser | TF-IDF (1–2 grams, 5000 features) |
 | UI | Streamlit |
 | Storage | JSON + CSV |
 | Evaluation | scikit-learn + matplotlib |
 
 ---
 
-# Documentation  
-- docs/architecture.md  
-- docs/dataset.md  
-- docs/training_pipeline.md  
-- docs/model.md  
-- docs/explainability.md  
-- docs/feedback_loop.md  
-- docs/evaluation.md  
-- docs/ui.md
+# Documentation
+
+- `docs/architecture.md`  
+- `docs/dataset.md`  
+- `docs/training_pipeline.md`  
+- `docs/model.md`  
+- `docs/explainability.md`  
+- `docs/feedback_loop.md`  
+- `docs/evaluation.md`  
+- `docs/ui.md`  
 
 ---
 
-#  Project Structure
+# Project Structure
 
 Wikit/
 │
@@ -134,32 +136,34 @@ Wikit/
 
 ---
 
-#  Running the App
+# Running the App
 
 Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 
-Launch Streamlit UI:
+Launch UI:
 
 streamlit run project/ui/app.py
 
 
 ⸻
 
- Re-training
+Re-training
+
+Base training:
 
 python3 project/src/train.py
 
-Human-feedback based retraining:
+Human-feedback retraining:
 
 python3 project/src/retrain.py
 
 
 ⸻
 
- Evaluation
+Evaluation
 
 python3 project/src/evaluate.py
 
@@ -169,58 +173,57 @@ Outputs:
 
 ⸻
 
- Dataset Summary
+Dataset Summary
 
 Total samples: 1000
+Train: 650
+Test: 352
 
-Train Set (650 samples)
+Train Distribution
+	•	Entertainment: 104
+	•	Groceries: 98
+	•	Dining: 96
+	•	Travel: 93
+	•	Shopping: 91
+	•	Bills: 88
+	•	Fuel: 81
 
-Entertainment    104
-Groceries         98
-Dining            96
-Travel            93
-Shopping          91
-Bills             88
-Fuel              81
-
-Test Set (352 samples)
-
-Entertainment    60
-Shopping         55
-Groceries        52
-Dining           52
-Travel           46
-Bills            46
-Fuel             41
-
+Test Distribution
+	•	Entertainment: 60
+	•	Shopping: 55
+	•	Groceries: 52
+	•	Dining: 52
+	•	Travel: 46
+	•	Bills: 46
+	•	Fuel: 41
 
 ⸻
 
- Performance Summary
+Performance Summary
 	•	Macro F1: 0.93
 	•	Accuracy: 0.93
 	•	Latency: 0.12 ms / prediction
-	•	Throughput: 8300+ predictions/second
+	•	Throughput: 8300+ predictions/sec
 	•	Explainability: token-level contributions
 
 ⸻
 
- Demo Requirements (PS Guidelines)
+Demo Checklist (PS Requirements)
 
-This solution covers:
-
-✔ End-to-end pipeline
-✔ Evaluation with reproducible metrics
-✔ Customisable taxonomy
-✔ Explainability
-✔ Human feedback loop
-✔ Batch inference
-✔ Model retraining
-✔ Real + synthetic data usage
+This solution includes:
+	•	End-to-end ML pipeline
+	•	Evaluation with reproducible metrics
+	•	Customisable taxonomy
+	•	Explainability features
+	•	Human feedback mechanism
+	•	Batch inference
+	•	One-click model retraining
+	•	Real + synthetic data usage
 
 ⸻
 
- Acknowledgements
+Acknowledgements
 
 Developed by Nishant Bidhu and Swati Nim
-Developed for AnitaB.org India GHCI 25 Hackathon
+Created for AnitaB.org India GHCI 25 Hackathon
+
