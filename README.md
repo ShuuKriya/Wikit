@@ -233,7 +233,7 @@ Outputs:
 
 ---
 
-## Performance Summary 🚀
+## Performance Summary 
 
 * **Macro F1:** 0.93
 * **Accuracy:** 0.93
