@@ -88,8 +88,8 @@
 ```json
 {
   "num_samples": 40,
-  "robustness_score": 0.975,
-  "mismatch_rate": 0.025
+  "robustness_score": 0.925,
+  "mismatch_rate": 0.075
 }
 ```
 

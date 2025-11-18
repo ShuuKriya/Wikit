@@ -75,407 +75,407 @@
   },
   "robustness": {
     "num_samples": 40,
-    "robustness_score": 0.975,
-    "mismatch_rate": 0.025,
+    "robustness_score": 0.925,
+    "mismatch_rate": 0.075,
     "samples": [
       {
-        "original": "INDIANOIL PUMP - BLR",
-        "noisy": "INIDANOIL PUMP - BLR",
-        "clean_prediction": "Fuel",
-        "noisy_prediction": "Fuel",
-        "clean_conf": 0.6598615834517547,
-        "noisy_conf": 0.5047897671315469,
-        "confidence_drop": 0.15507181632020783,
+        "original": "TXN ID  DMART PAYMENT @OKICICI",
+        "noisy": "TXN ID  DMART PAYMENT @OKICICI!!!",
+        "clean_prediction": "Groceries",
+        "noisy_prediction": "Groceries",
+        "clean_conf": 0.2714657537312101,
+        "noisy_conf": 0.2714657537312101,
+        "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "#88324 HPCL PETROL PUMP UPI",
-        "noisy": "#88324   HPCL   PETROL   PUMP   UPI",
+        "original": "Dineout payment at The Yellow Chili ref 98327",
+        "noisy": "Dineout payment at The Yellow Chili ref 98327!!!",
+        "clean_prediction": "Dining",
+        "noisy_prediction": "Dining",
+        "clean_conf": 0.3739464370355988,
+        "noisy_conf": 0.3739464370355988,
+        "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "Diesel top-up Indian Oil Tanker 786",
+        "noisy": "$$ Diesel top-up Indian Oil Tanker 786",
         "clean_prediction": "Fuel",
         "noisy_prediction": "Fuel",
-        "clean_conf": 0.771758487817263,
-        "noisy_conf": 0.771758487817263,
+        "clean_conf": 0.2680930763778516,
+        "noisy_conf": 0.2715388590568182,
+        "confidence_drop": -0.003445782678966558,
+        "same_class": true
+      },
+      {
+        "original": "TXN ID  DMART PAYMENT @OKICICI",
+        "noisy": "TXN ID  DMART PAYMENT @OKICICI!!!",
+        "clean_prediction": "Groceries",
+        "noisy_prediction": "Groceries",
+        "clean_conf": 0.2714657537312101,
+        "noisy_conf": 0.2714657537312101,
         "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "Bus Ticket Sleeper",
+        "noisy": "Bus TIcKEt slEEPER",
+        "clean_prediction": "Travel",
+        "noisy_prediction": "Travel",
+        "clean_conf": 0.38254263355839113,
+        "noisy_conf": 0.38254263355839113,
+        "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "Capital Grille",
+        "noisy": "CapiTAl GrILle",
+        "clean_prediction": "Dining",
+        "noisy_prediction": "Dining",
+        "clean_conf": 0.43497163706943553,
+        "noisy_conf": 0.43497163706943553,
+        "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "Burger King",
+        "noisy": "buRgeR KING",
+        "clean_prediction": "Dining",
+        "noisy_prediction": "Dining",
+        "clean_conf": 0.5222647577761506,
+        "noisy_conf": 0.5222647577761506,
+        "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "McDonald's",
+        "noisy": "McDonal'ds",
+        "clean_prediction": "Dining",
+        "noisy_prediction": "Groceries",
+        "clean_conf": 0.397207973393347,
+        "noisy_conf": 0.16960581675936562,
+        "confidence_drop": 0.2276021566339814,
+        "same_class": false
+      },
+      {
+        "original": "UPI  GOIBIBO HOTEL UPI",
+        "noisy": "UPI  OGIBIBO HOTEL UPI",
+        "clean_prediction": "Travel",
+        "noisy_prediction": "Travel",
+        "clean_conf": 0.46083781938775925,
+        "noisy_conf": 0.228015935152195,
+        "confidence_drop": 0.23282188423556424,
+        "same_class": true
+      },
+      {
+        "original": "Bus Ticket from RedBus Booking ID 9876",
+        "noisy": "$$ Bus Ticket from RedBus Booking ID 9876",
+        "clean_prediction": "Travel",
+        "noisy_prediction": "Travel",
+        "clean_conf": 0.5618060277535568,
+        "noisy_conf": 0.5905603116396853,
+        "confidence_drop": -0.02875428388612844,
         "same_class": true
       },
       {
         "original": "BESCOM ELECTRICITY @OKICICI",
-        "noisy": "$$ BESCOM ELECTRICITY @OKICICI",
+        "noisy": "BEScOM eLEcTrIciTY @OKicIcI",
         "clean_prediction": "Bills",
         "noisy_prediction": "Bills",
-        "clean_conf": 0.6737924392630411,
-        "noisy_conf": 0.6106643585886093,
-        "confidence_drop": 0.06312808067443176,
-        "same_class": true
-      },
-      {
-        "original": "99.00 Rs AIRTEL POSTPAID PAYMENT",
-        "noisy": "$$ 99.00 Rs AIRTEL POSTPAID PAYMENT",
-        "clean_prediction": "Bills",
-        "noisy_prediction": "Bills",
-        "clean_conf": 0.4967636447431136,
-        "noisy_conf": 0.7536924293350614,
-        "confidence_drop": -0.25692878459194785,
-        "same_class": true
-      },
-      {
-        "original": "ACT BROADBAND",
-        "noisy": "ACT   BROADBAND",
-        "clean_prediction": "Bills",
-        "noisy_prediction": "Bills",
-        "clean_conf": 0.6745371794120633,
-        "noisy_conf": 0.6745371794120633,
+        "clean_conf": 0.791747774853879,
+        "noisy_conf": 0.791747774853879,
         "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "ATM Wdl Chgs 15-Nov-25 at STAR BAZAR A/C #00123",
-        "noisy": "$$ ATM Wdl Chgs 15-Nov-25 at STAR BAZAR A/C #00123",
+        "original": "NATURES BASKET",
+        "noisy": "nAtuRes bAsket",
         "clean_prediction": "Groceries",
         "noisy_prediction": "Groceries",
-        "clean_conf": 0.2948775100008674,
-        "noisy_conf": 0.28310393074842377,
-        "confidence_drop": 0.011773579252443656,
+        "clean_conf": 0.7255325028897046,
+        "noisy_conf": 0.7255325028897046,
+        "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "MAKEMYTRIP BOOKING",
-        "noisy": "MAKEMYTRIP BOOKNIG",
-        "clean_prediction": "Travel",
-        "noisy_prediction": "Travel",
-        "clean_conf": 0.6500571714610576,
-        "noisy_conf": 0.4299661219814062,
-        "confidence_drop": 0.22009104947965136,
+        "original": "Gaming Credit Purchase Steam Wallet",
+        "noisy": "Gaming Credit Purchase Steam Wallet!!!",
+        "clean_prediction": "Entertainment",
+        "noisy_prediction": "Entertainment",
+        "clean_conf": 0.3451538654851572,
+        "noisy_conf": 0.3451538654851572,
+        "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "Electricity Bill Due",
-        "noisy": "Electrciity Bill Due",
-        "clean_prediction": "Bills",
-        "noisy_prediction": "Bills",
-        "clean_conf": 0.5159304281489917,
-        "noisy_conf": 0.39394112010470184,
-        "confidence_drop": 0.12198930804428987,
+        "original": "*ONLINE AJIO PURCHASE",
+        "noisy": "*ONLINE   AJIO   PURCHASE",
+        "clean_prediction": "Shopping",
+        "noisy_prediction": "Shopping",
+        "clean_conf": 0.609014830759215,
+        "noisy_conf": 0.609014830759215,
+        "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "Shell Fuel Loyalty Pts",
-        "noisy": "$$ Shell Fuel Loyalty Pts",
-        "clean_prediction": "Fuel",
-        "noisy_prediction": "Fuel",
-        "clean_conf": 0.6383425224282449,
-        "noisy_conf": 0.7498636139181145,
-        "confidence_drop": -0.11152109148986966,
-        "same_class": true
-      },
-      {
-        "original": "*ORDER # ACT BROADBAND",
-        "noisy": "*ORDE R# ACT BROADBAND",
-        "clean_prediction": "Bills",
-        "noisy_prediction": "Bills",
-        "clean_conf": 0.562235518778885,
-        "noisy_conf": 0.6691752481120338,
-        "confidence_drop": -0.10693972933314877,
-        "same_class": true
-      },
-      {
-        "original": "SPENCERS RETAIL @OKICICI",
-        "noisy": "SPENCERS   RETAIL   @OKICICI",
+        "original": "Bharat Petroleum Payment Ref 554433",
+        "noisy": "Bharat Petroleum Payment eRf 554433",
         "clean_prediction": "Groceries",
         "noisy_prediction": "Groceries",
-        "clean_conf": 0.4197389095736357,
-        "noisy_conf": 0.4197389095736357,
+        "clean_conf": 0.16363243409297323,
+        "noisy_conf": 0.16363243409297323,
         "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "Rental Car Booking",
-        "noisy": "Rental Car Booking!!!",
+        "original": "99.00 Rs SPOTIFY PREMIUM",
+        "noisy": "99.00 rS SPOTIfY prEMIUM",
+        "clean_prediction": "Entertainment",
+        "noisy_prediction": "Entertainment",
+        "clean_conf": 0.6049749466641563,
+        "noisy_conf": 0.6049749466641563,
+        "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "PAYMENT MCDONALDS BILL",
+        "noisy": "$$ PAYMENT MCDONALDS BILL",
+        "clean_prediction": "Dining",
+        "noisy_prediction": "Dining",
+        "clean_conf": 0.398719199574206,
+        "noisy_conf": 0.4155208389595901,
+        "confidence_drop": -0.016801639385384093,
+        "same_class": true
+      },
+      {
+        "original": "TATA PLAY DTH",
+        "noisy": "$$ TATA PLAY DTH",
+        "clean_prediction": "Bills",
+        "noisy_prediction": "Bills",
+        "clean_conf": 0.5032740432093962,
+        "noisy_conf": 0.5222249864843845,
+        "confidence_drop": -0.018950943274988363,
+        "same_class": true
+      },
+      {
+        "original": "Spotify Premium Subscription Payment",
+        "noisy": "Spotify Premium Subscription Payment!!!",
+        "clean_prediction": "Entertainment",
+        "noisy_prediction": "Entertainment",
+        "clean_conf": 0.8870063093643134,
+        "noisy_conf": 0.8870063093643134,
+        "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "Netflix Gift Card Redemption",
+        "noisy": "$$ Netflix Gift Card Redemption",
+        "clean_prediction": "Entertainment",
+        "noisy_prediction": "Entertainment",
+        "clean_conf": 0.47131748484568875,
+        "noisy_conf": 0.39948436059032505,
+        "confidence_drop": 0.0718331242553637,
+        "same_class": true
+      },
+      {
+        "original": "REF  MAKEMYTRIP BOOKING - MUMBAI",
+        "noisy": "REF  MakEmyTRIP BOOKINg - MumBaI",
         "clean_prediction": "Travel",
         "noisy_prediction": "Travel",
-        "clean_conf": 0.3028359921961451,
-        "noisy_conf": 0.3028359921961451,
+        "clean_conf": 0.709147471741858,
+        "noisy_conf": 0.709147471741858,
         "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "REF  SHELL GAS STATION - BLR",
-        "noisy": "$$ REF  SHELL GAS STATION - BLR",
-        "clean_prediction": "Fuel",
-        "noisy_prediction": "Fuel",
-        "clean_conf": 0.45387181699979345,
-        "noisy_conf": 0.45387181699979345,
+        "original": "LIC Premium Payment - Policy 12345",
+        "noisy": "LIC Premium Payment - Ploicy 12345",
+        "clean_prediction": "Bills",
+        "noisy_prediction": "Entertainment",
+        "clean_conf": 0.2501957044150543,
+        "noisy_conf": 0.25642750147439175,
+        "confidence_drop": -0.006231797059337463,
+        "same_class": false
+      },
+      {
+        "original": "Grocery Mart Supermarket 4567 txn-3928",
+        "noisy": "Grocery   Mart   Supermarket   4567   txn-3928",
+        "clean_prediction": "Groceries",
+        "noisy_prediction": "Groceries",
+        "clean_conf": 0.42640499044951335,
+        "noisy_conf": 0.42640499044951335,
         "confidence_drop": 0.0,
         "same_class": true
       },
       {
         "original": "HPCL Petrol Station payment Rs. 1500.00 Ref 7462",
-        "noisy": "$$ HPCL Petrol Station payment Rs. 1500.00 Ref 7462",
+        "noisy": "HPCL Petrol Station payment Rs. 1500.00 Ref 7462!!!",
         "clean_prediction": "Fuel",
         "noisy_prediction": "Fuel",
-        "clean_conf": 0.6808966778227488,
-        "noisy_conf": 0.6781126988068994,
-        "confidence_drop": 0.0027839790158493694,
+        "clean_conf": 0.74101618780077,
+        "noisy_conf": 0.74101618780077,
+        "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "PAYMENT REDBUS PAYMENT 450.00",
-        "noisy": "PAYMENT REDBUS APYMENT 450.00",
+        "original": "OLA TRIP REF",
+        "noisy": "OLA   TRIP   REF",
         "clean_prediction": "Travel",
         "noisy_prediction": "Travel",
-        "clean_conf": 0.5275193684819419,
-        "noisy_conf": 0.5275193684819419,
+        "clean_conf": 0.7604853016866875,
+        "noisy_conf": 0.7604853016866875,
         "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "UBER RIDE",
-        "noisy": "$$ UBER RIDE",
-        "clean_prediction": "Travel",
-        "noisy_prediction": "Travel",
-        "clean_conf": 0.4506335135114165,
-        "noisy_conf": 0.4506335135114165,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "FLIPKART ORDER",
-        "noisy": "FLIPKART   ORDER",
-        "clean_prediction": "Shopping",
-        "noisy_prediction": "Shopping",
-        "clean_conf": 0.6562823463110812,
-        "noisy_conf": 0.6562823463110812,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "EB Bill Payment - BESCOM A/C 9876543210",
-        "noisy": "Eb bill paYmeNT - bEsCOm A/C 9876543210",
-        "clean_prediction": "Bills",
-        "noisy_prediction": "Bills",
-        "clean_conf": 0.4233918838579767,
-        "noisy_conf": 0.4233918838579767,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "BOOKMYSHOW MOVIE*ORDER #",
-        "noisy": "$$ BOOKMYSHOW MOVIE*ORDER #",
+        "original": "Amazon Prime Video Rental - Movie Title",
+        "noisy": "$$ Amazon Prime Video Rental - Movie Title",
         "clean_prediction": "Entertainment",
         "noisy_prediction": "Entertainment",
-        "clean_conf": 0.7441957097699191,
-        "noisy_conf": 0.7436349850893383,
-        "confidence_drop": 0.0005607246805807709,
-        "same_class": true
-      },
-      {
-        "original": "IOCL Fuel Additive",
-        "noisy": "IOCL Fuel Additive!!!",
-        "clean_prediction": "Fuel",
-        "noisy_prediction": "Fuel",
-        "clean_conf": 0.6703258082848828,
-        "noisy_conf": 0.6703258082848828,
+        "clean_conf": 0.4301108761087495,
+        "noisy_conf": 0.4301108761087495,
         "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "- MUMBAI NYKAA PAYMENT 450.00",
-        "noisy": "-   MUMBAI   NYKAA   PAYMENT   450.00",
-        "clean_prediction": "Shopping",
-        "noisy_prediction": "Shopping",
-        "clean_conf": 0.52263755623412,
-        "noisy_conf": 0.52263755623412,
-        "confidence_drop": 0.0,
+        "original": "BESCOM ELECTRICITY#88324",
+        "noisy": "BESCOM ELETCRICITY#88324",
+        "clean_prediction": "Bills",
+        "noisy_prediction": "Bills",
+        "clean_conf": 0.7211834311324236,
+        "noisy_conf": 0.5162459644043417,
+        "confidence_drop": 0.20493746672808189,
         "same_class": true
       },
       {
-        "original": "450.00 BIGBASKET ORDER 450.00",
-        "noisy": "450.00   BIGBASKET   ORDER   450.00",
-        "clean_prediction": "Groceries",
-        "noisy_prediction": "Groceries",
-        "clean_conf": 0.3402869494064328,
-        "noisy_conf": 0.3402869494064328,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "HOTSTAR PLAN#88324",
-        "noisy": "HOTSTAR   PLAN#88324",
+        "original": "Apple Music",
+        "noisy": "Apple   Music",
         "clean_prediction": "Entertainment",
         "noisy_prediction": "Entertainment",
-        "clean_conf": 0.6716149398313628,
-        "noisy_conf": 0.6716149398313628,
+        "clean_conf": 0.25118588774657136,
+        "noisy_conf": 0.25118588774657136,
         "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "DMART PAYMENT REF",
-        "noisy": "DMART PAYMEN TREF",
-        "clean_prediction": "Groceries",
-        "noisy_prediction": "Groceries",
-        "clean_conf": 0.42729103594216855,
-        "noisy_conf": 0.4308238670737466,
-        "confidence_drop": -0.0035328311315780403,
-        "same_class": true
-      },
-      {
-        "original": "SHELL GAS STATION TXN ID",
-        "noisy": "SHELL GAS STATION TXN ID!!!",
-        "clean_prediction": "Fuel",
-        "noisy_prediction": "Fuel",
-        "clean_conf": 0.5078778978242801,
-        "noisy_conf": 0.5078778978242801,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "FLIPKART ORDER TXN ID",
-        "noisy": "FLIPKART   ORDER   TXN   ID",
+        "original": "UPI  MYNTRA ONLINE",
+        "noisy": "UIP  MYNTRA ONLINE",
         "clean_prediction": "Shopping",
         "noisy_prediction": "Shopping",
-        "clean_conf": 0.6562823463110812,
-        "noisy_conf": 0.6562823463110812,
-        "confidence_drop": 0.0,
+        "clean_conf": 0.682734943777687,
+        "noisy_conf": 0.718033323810264,
+        "confidence_drop": -0.035298380032577015,
         "same_class": true
       },
       {
-        "original": "99.00 Rs STARBUCKS COFFEE",
-        "noisy": "99.00   Rs   STARBUCKS   COFFEE",
-        "clean_prediction": "Dining",
-        "noisy_prediction": "Dining",
-        "clean_conf": 0.5737176373892247,
-        "noisy_conf": 0.5737176373892247,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "PAYMENT IRCTC TICKET - MUMBAI",
-        "noisy": "payMeNt irctC TiCKet - mUmbai",
-        "clean_prediction": "Travel",
-        "noisy_prediction": "Travel",
-        "clean_conf": 0.5799252925788838,
-        "noisy_conf": 0.5799252925788838,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "BIGBASKET ORDER",
-        "noisy": "BIGBASKET ORDER!!!",
+        "original": "WHOLE FOODS MARKET 0456",
+        "noisy": "$$ WHOLE FOODS MARKET 0456",
         "clean_prediction": "Groceries",
         "noisy_prediction": "Groceries",
-        "clean_conf": 0.5955661276082924,
-        "noisy_conf": 0.5918582795344003,
-        "confidence_drop": 0.0037078480738921282,
+        "clean_conf": 0.45446649206278156,
+        "noisy_conf": 0.4646331366451751,
+        "confidence_drop": -0.010166644582393525,
         "same_class": true
       },
       {
-        "original": "Metro Ride Fare",
-        "noisy": "$$ Metro Ride Fare",
-        "clean_prediction": "Travel",
-        "noisy_prediction": "Travel",
-        "clean_conf": 0.3549502728989615,
-        "noisy_conf": 0.32441197860736853,
-        "confidence_drop": 0.030538294291592993,
-        "same_class": true
-      },
-      {
-        "original": "POS Purchase 15-Oct-25 M/S RELIANCE FRESH",
-        "noisy": "POS   Purchase   15-Oct-25   M/S   RELIANCE   FRESH",
-        "clean_prediction": "Groceries",
-        "noisy_prediction": "Groceries",
-        "clean_conf": 0.32962075404983904,
-        "noisy_conf": 0.32962075404983904,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "AIRTEL POSTPAID UPI@YBL",
-        "noisy": "AIRTEL POSTPAID UPI@BYL",
-        "clean_prediction": "Bills",
-        "noisy_prediction": "Bills",
-        "clean_conf": 0.7280736274782661,
-        "noisy_conf": 0.7280736274782661,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "SHELL GAS STATION",
-        "noisy": "SHELL GAS STATINO",
+        "original": "450.00 BPCL FUEL*ORDER #",
+        "noisy": "450.00 bpCl fuEL*oRDER #",
         "clean_prediction": "Fuel",
         "noisy_prediction": "Fuel",
-        "clean_conf": 0.5078778978242801,
-        "noisy_conf": 0.4189677540475001,
-        "confidence_drop": 0.08891014377677997,
-        "same_class": true
-      },
-      {
-        "original": "PAYMENT JIO RECHARGE TXN ID",
-        "noisy": "PAYMENT   JIO   RECHARGE   TXN   ID",
-        "clean_prediction": "Bills",
-        "noisy_prediction": "Bills",
-        "clean_conf": 0.49733650474131824,
-        "noisy_conf": 0.49733650474131824,
+        "clean_conf": 0.5721712185517278,
+        "noisy_conf": 0.5721712185517278,
         "confidence_drop": 0.0,
         "same_class": true
       },
       {
-        "original": "Clothes from Max Fashion",
-        "noisy": "$$ Clothes from Max Fashion",
-        "clean_prediction": "Shopping",
-        "noisy_prediction": "Shopping",
-        "clean_conf": 0.2645287600845725,
-        "noisy_conf": 0.26926487607550514,
-        "confidence_drop": -0.0047361159909326545,
-        "same_class": true
-      },
-      {
-        "original": "99.00 Rs JIO RECHARGE 1299.00 INR",
-        "noisy": "99.00 Rs JIO RECHARGE 1299.00 INR!!!",
-        "clean_prediction": "Bills",
-        "noisy_prediction": "Bills",
-        "clean_conf": 0.334600914790307,
-        "noisy_conf": 0.334600914790307,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "*ONLINE BIGBASKET ORDER",
-        "noisy": "*ONLINE   BIGBASKET   ORDER",
-        "clean_prediction": "Groceries",
-        "noisy_prediction": "Groceries",
-        "clean_conf": 0.5003748718242361,
-        "noisy_conf": 0.5003748718242361,
-        "confidence_drop": 0.0,
-        "same_class": true
-      },
-      {
-        "original": "OLA TRIP",
-        "noisy": "OLA TRIP!!!",
-        "clean_prediction": "Travel",
-        "noisy_prediction": "Travel",
-        "clean_conf": 0.6632090563807459,
-        "noisy_conf": 0.6596224041553147,
-        "confidence_drop": 0.003586652225431197,
-        "same_class": true
-      },
-      {
-        "original": "UPI Pmt to Zomato Order #847293 @875389XXX4",
-        "noisy": "$$ UPI Pmt to Zomato Order #847293 @875389XXX4",
-        "clean_prediction": "Dining",
-        "noisy_prediction": "Dining",
-        "clean_conf": 0.42796755014170434,
-        "noisy_conf": 0.4950035109198733,
-        "confidence_drop": -0.06703596077816898,
-        "same_class": true
-      },
-      {
-        "original": "AMAZON PRIME VIDEO UPI@YBL",
-        "noisy": "AAMZON PRIME VIDEO UPI@YBL",
-        "clean_prediction": "Shopping",
+        "original": "AMC Theaters",
+        "noisy": "aMC tHeatERs",
+        "clean_prediction": "Entertainment",
         "noisy_prediction": "Entertainment",
-        "clean_conf": 0.3279489313216769,
-        "noisy_conf": 0.34621357305322176,
-        "confidence_drop": -0.01826464173154485,
+        "clean_conf": 0.4065566607233038,
+        "noisy_conf": 0.4065566607233038,
+        "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "HPCL PETROL PUMP *ONLINE",
+        "noisy": "$$ HPCL PETROL PUMP *ONLINE",
+        "clean_prediction": "Fuel",
+        "noisy_prediction": "Fuel",
+        "clean_conf": 0.859667107387581,
+        "noisy_conf": 0.9013950175344467,
+        "confidence_drop": -0.04172791014686572,
+        "same_class": true
+      },
+      {
+        "original": "AJIO PURCHASE",
+        "noisy": "AJIO PURCHASE!!!",
+        "clean_prediction": "Shopping",
+        "noisy_prediction": "Shopping",
+        "clean_conf": 0.625155045779011,
+        "noisy_conf": 0.5702006664656625,
+        "confidence_drop": 0.05495437931334857,
+        "same_class": true
+      },
+      {
+        "original": "@OKICICI  SHELL GAS STATION *ONLINE",
+        "noisy": "$$ @OKICICI  SHELL GAS STATION *ONLINE",
+        "clean_prediction": "Fuel",
+        "noisy_prediction": "Fuel",
+        "clean_conf": 0.48627487153607174,
+        "noisy_conf": 0.5953971232168532,
+        "confidence_drop": -0.10912225168078149,
+        "same_class": true
+      },
+      {
+        "original": "ACT BROADBAND 1299.00 INR",
+        "noisy": "aCt brOadBaND 1299.00 INR",
+        "clean_prediction": "Bills",
+        "noisy_prediction": "Bills",
+        "clean_conf": 0.7774444053799545,
+        "noisy_conf": 0.7774444053799545,
+        "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "UPI  SPENCERS RETAIL",
+        "noisy": "UPI  SEPNCERS RETAIL",
+        "clean_prediction": "Groceries",
+        "noisy_prediction": "Groceries",
+        "clean_conf": 0.5136848519003014,
+        "noisy_conf": 0.3514443268809425,
+        "confidence_drop": 0.16224052501935893,
+        "same_class": true
+      },
+      {
+        "original": "- BLR GOIBIBO HOTEL UPI@YBL",
+        "noisy": "-   BLR   GOIBIBO   HOTEL   UPI@YBL",
+        "clean_prediction": "Travel",
+        "noisy_prediction": "Travel",
+        "clean_conf": 0.6950243049215279,
+        "noisy_conf": 0.6950243049215279,
+        "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "INDIANOIL PUMP*ORDER #",
+        "noisy": "INDIANOIL   PUMP*ORDER   #",
+        "clean_prediction": "Fuel",
+        "noisy_prediction": "Fuel",
+        "clean_conf": 0.7125316853973014,
+        "noisy_conf": 0.7125316853973014,
+        "confidence_drop": 0.0,
+        "same_class": true
+      },
+      {
+        "original": "APPLE.COM BILLING",
+        "noisy": "PAPLE.COM BILLING",
+        "clean_prediction": "Entertainment",
+        "noisy_prediction": "Shopping",
+        "clean_conf": 0.23735841019092294,
+        "noisy_conf": 0.22870333198374132,
+        "confidence_drop": 0.008655078207181616,
         "same_class": false
       }
     ],
@@ -483,54 +483,54 @@
       {
         "merchant": "zomato",
         "prediction": "Dining",
-        "confidence": 0.7185251121456437
+        "confidence": 0.7327255071460483
       },
       {
         "merchant": "amazon",
         "prediction": "Shopping",
-        "confidence": 0.5644844242303748
+        "confidence": 0.7618622071576115
       },
       {
         "merchant": "flipkart",
         "prediction": "Shopping",
-        "confidence": 0.6562823463110812
+        "confidence": 0.5526649269611479
       },
       {
         "merchant": "hpcl",
         "prediction": "Fuel",
-        "confidence": 0.48830913649281493
+        "confidence": 0.530346375562077
       },
       {
         "merchant": "bigbasket",
         "prediction": "Groceries",
-        "confidence": 0.5955661276082924
+        "confidence": 0.7369635526214006
       }
     ],
     "region_bias": [
       {
         "city": "Mumbai",
         "prediction": "Dining",
-        "confidence": 0.6281065243900358
+        "confidence": 0.7652431762724865
       },
       {
         "city": "Delhi",
         "prediction": "Dining",
-        "confidence": 0.6069361476392814
+        "confidence": 0.7380109639694994
       },
       {
         "city": "Bangalore",
         "prediction": "Dining",
-        "confidence": 0.6653940213099707
+        "confidence": 0.7993625513907818
       },
       {
         "city": "Chennai",
         "prediction": "Dining",
-        "confidence": 0.6653940213099707
+        "confidence": 0.7993625513907818
       },
       {
         "city": "Hyd",
         "prediction": "Dining",
-        "confidence": 0.6653940213099707
+        "confidence": 0.7993625513907818
       }
     ]
   },
