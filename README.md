@@ -98,67 +98,68 @@ Token-level insights including:
 ---
 
 # Project Structure
-
-
+```
 Wikit/
+├── README.md
+├── requirements.txt
+│
+├── docs/
+│   ├── dataset.md
+│   ├── evaluation.md
+│   ├── explainability_bias_mitigation.md
+│   └── model.md
 │
 ├── project/
-│   ├── src/
-│   │   ├── train.py
-│   │   ├── retrain.py
-│   │   ├── evaluate.py
-│   │   ├── preprocess.py
-│   │   ├── predict.py
-│   │   ├── feedback.py
-│   │   ├── explain.py
-│   │   ├── performance.py
-│   │   ├── robustness.py
-│   │   ├── taxonomy.py
-│   │   └── utils.py
-│   │
-│   ├── ui/
-│   │   ├── .streamlit/
-│   │   │   └── config.toml
-│   │   └── app.py
-│   │
-│   ├── model/
-│   │   ├── model.pkl
-│   │   └── vectorizer.pkl
+│   ├── config.json
 │   │
 │   ├── data/
 │   │   ├── train.csv
 │   │   ├── test.csv
+│   │   ├── batch_output.csv
+│   │   ├── gomasaki.csv
+│   │   ├── kaggle_sets.csv
+│   │   ├── gen_data.py
 │   │   ├── normalization.json
 │   │   ├── taxonomy.json
 │   │   ├── memory.json
 │   │   └── feedback.csv
 │   │
 │   ├── evaluation/
-│   │   ├── metrics_report.json
 │   │   ├── confusion_matrix.png
+│   │   ├── final_report.json
+│   │   ├── final_report.md
+│   │   ├── metrics_report.json
 │   │   ├── performance_report.json
 │   │   └── robustness_report.json
 │   │
-│   ├── config.json
-│   └── README.md
+│   ├── logs/
+│   │   ├── predict.log
+│   │   └── train.log
+│   │
+│   ├── model/
+│   │   ├── model.pkl
+│   │   └── vectorizer.pkl
+│   │
+│   └── src/
+│       ├── preprocess.py
+│       ├── predict.py
+│       ├── explain.py
+│       ├── feedback.py
+│       ├── retrain.py
+│       ├── taxonomy.py
+│       ├── evaluate.py
+│       ├── performance.py
+│       ├── robustness.py
+│       ├── generate_report.py
+│       └── train.py
 │
-├── docs/
-│   ├── architecture.md
-│   ├── dataset.md
-│   ├── training_pipeline.md
-│   ├── model.md
-│   ├── explainability.md
-│   ├── feedback_loop.md
-│   ├── evaluation.md
-│   └── ui.md
-│
-├── requirements.txt
-└── README.md
+└── ui/
+    ├── app.py
+    └── .streamlit/
+        └── config.toml
 
+```
 
-
-
-⸻
 
 
 
@@ -167,90 +168,97 @@ Wikit/
 
 Install dependencies:
 
-```bash
+```
 pip install -r requirements.txt
+```
 
 Launch UI:
-
+```
 streamlit run project/ui/app.py
 
-
+```
 ⸻
 
 Re-training
 
 Base training:
-
+```
 python3 project/src/train.py
-
+```
 Human-feedback retraining:
-
+```
 python3 project/src/retrain.py
 
-
+```
 ⸻
 
 Evaluation
-
+```
 python3 project/src/evaluate.py
-
+```
 Outputs:
 	•	evaluation/metrics_report.json
 	•	evaluation/confusion_matrix.png
 
 ⸻
+## Dataset Summary 
 
-Dataset Summary
+| Metric | Value |
+| :--- | :--- |
+| **Total samples** | 1000 |
+| **Train** | 650 |
+| **Test** | 352 |
 
-Total samples: 1000
-Train: 650
-Test: 352
+---
 
-Train Distribution
-	•	Entertainment: 104
-	•	Groceries: 98
-	•	Dining: 96
-	•	Travel: 93
-	•	Shopping: 91
-	•	Bills: 88
-	•	Fuel: 81
+### Train Distribution
 
-Test Distribution
-	•	Entertainment: 60
-	•	Shopping: 55
-	•	Groceries: 52
-	•	Dining: 52
-	•	Travel: 46
-	•	Bills: 46
-	•	Fuel: 41
+* Entertainment: 104
+* Groceries: 98
+* Dining: 96
+* Travel: 93
+* Shopping: 91
+* Bills: 88
+* Fuel: 81
 
-⸻
+### Test Distribution
 
-Performance Summary
-	•	Macro F1: 0.93
-	•	Accuracy: 0.93
-	•	Latency: 0.12 ms / prediction
-	•	Throughput: 8300+ predictions/sec
-	•	Explainability: token-level contributions
+* Entertainment: 60
+* Shopping: 55
+* Groceries: 52
+* Dining: 52
+* Travel: 46
+* Bills: 46
+* Fuel: 41
 
-⸻
+---
 
-Demo Checklist (PS Requirements)
+## Performance Summary 🚀
+
+* **Macro F1:** 0.93
+* **Accuracy:** 0.93
+* **Latency:** 0.12 ms / prediction
+* **Throughput:** 8300+ predictions/sec
+* **Explainability:** token-level contributions
+
+---
+
+## Checklist (PS Requirements) 
 
 This solution includes:
-	•	End-to-end ML pipeline
-	•	Evaluation with reproducible metrics
-	•	Customisable taxonomy
-	•	Explainability features
-	•	Human feedback mechanism
-	•	Batch inference
-	•	One-click model retraining
-	•	Real + synthetic data usage
 
-⸻
+* End-to-end **ML pipeline**
+* **Evaluation** with reproducible metrics
+* **Customisable taxonomy**
+* **Explainability** features
+* **Human feedback** mechanism
+* **Batch inference**
+* **One-click model retraining**
+* **Real + synthetic data** usage
 
-Acknowledgements
+---
 
-Developed by Nishant Bidhu and Swati Nim
-Created for AnitaB.org India GHCI 25 Hackathon
+## Acknowledgements
 
+Developed by **Nishant Bidhu** and **Swati Nim**
+Created for **AnitaB.org India GHCI 25 Hackathon**
