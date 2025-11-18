@@ -63,12 +63,12 @@ def predict_single(text: str, is_batch=False):
     combined_text = (cleaned or "") + " " + (merchant or "")
     X = vectorizer.transform([combined_text])
 
-    # decision_function for LR gives logits; if not available, use predict_proba
+
     try:
         logits = model.decision_function(X)[0]
         confs = softmax(logits)
     except Exception:
-        # fallback to predict_proba if decision_function unsupported
+
         probs = model.predict_proba(X)[0]
         confs = probs
 
@@ -92,7 +92,7 @@ def predict_single(text: str, is_batch=False):
     # --------------------------
     needs_feedback = confidence < THRESHOLD
 
-    # Batch behavior: optionally mark low-confidence rows as "Other"
+
     if is_batch and needs_feedback and BATCH_BEHAVIOR == "other":
         pred_class = "Other"
 
@@ -112,7 +112,7 @@ def explain_prediction(model, vectorizer, cleaned_text, merchant, combined_text)
     """
     feature_names = vectorizer.get_feature_names_out()
 
-    # Baseline prediction
+
     X = vectorizer.transform([combined_text])
     logits = model.decision_function(X)[0]
     base_conf = softmax(logits)[np.argmax(logits)]
@@ -129,7 +129,7 @@ def explain_prediction(model, vectorizer, cleaned_text, merchant, combined_text)
         else:
             coef_weight = 0.0
 
-        # perturbation → remove token
+
         perturbed = " ".join([t for t in tokens if t != tok])
         X_pert = vectorizer.transform([perturbed])
         logits_pert = model.decision_function(X_pert)[0]

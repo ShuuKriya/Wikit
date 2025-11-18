@@ -138,7 +138,7 @@ def retrain():
     print(f"Vectorizer saved to: {VECTORIZER_PATH}")
 
     # ----------------------------------
-    # Evaluate on *TRAIN* (or optionally use validation split)
+    # Evaluate on TRAIN
     # ----------------------------------
     print("\nEvaluating model...")
 

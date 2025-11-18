@@ -4,16 +4,16 @@ import json
 from typing import Tuple, Optional
 import pandas as pd
 
-# try optional rapidfuzz for fuzzy matching
+
 try:
     from rapidfuzz import process as rf_process, fuzz as rf_fuzz
     _HAS_RAPIDFUZZ = True
 except Exception:
     _HAS_RAPIDFUZZ = False
 
-# ---- Configurable patterns ----
+
 ORDER_ID_PATTERN = re.compile(r'\b(order|ord|txn|tx|ref|id|utr)[\s:\-#]*[A-Za-z0-9]+\b', flags=re.IGNORECASE)
-UPI_HANDLE_PATTERN = re.compile(r'\b[\w\.\-]{2,}@[a-zA-Z0-9]+\b')  # e.g., ramesh@okicici
+UPI_HANDLE_PATTERN = re.compile(r'\b[\w\.\-]{2,}@[a-zA-Z0-9]+\b')  
 NON_ALPHANUMERIC = re.compile(r'[^a-zA-Z0-9\s]')
 MULTI_SPACES = re.compile(r'\s+')
 
@@ -44,7 +44,7 @@ def clean_text(text: str) -> str:
         return ""
     t = text.strip()
 
-    # remove typical IDs (keep words, remove long alphanum IDs)
+    # remove typical IDs 
     t = re.sub(r'\b[A-Za-z]*\d+[A-Za-z\d]*\b', " ", t)
 
     # remove currency-like tokens and amounts
@@ -85,7 +85,7 @@ def extract_merchant(text: str) -> Optional[str]:
     if len(toks) == 0:
         return None
 
-    # heuristics: skip leading UPI/prefix tokens
+    # skip leading UPI/prefix tokens
     first = toks[0].lower()
     if first in ("upi", "pay", "payment", "card", "debit", "credit"):
         if len(toks) > 1:
@@ -123,14 +123,14 @@ def normalize_merchant(merchant: Optional[str], norm_table: dict) -> Optional[st
     m = merchant.lower().strip()
     if m in norm_table:
         return norm_table[m]
-    # try token-wise match
+    # token-wise match
     parts = m.split()
     for i in range(len(parts)):
         for j in range(i+1, min(len(parts), i+3) + 1):
             sub = " ".join(parts[i:j])
             if sub in norm_table:
                 return norm_table[sub]
-    # fuzzy match against known aliases
+
     candidates = list(norm_table.keys())
     fm = _fuzzy_match(m, candidates)
     if fm:
@@ -159,7 +159,7 @@ def preprocess_dataframe(df: pd.DataFrame,
     processed = df.apply(_apply, axis=1)
     return pd.concat([df.reset_index(drop=True), processed.reset_index(drop=True)], axis=1)
 
-# CLI quick test
+# CLI test
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()

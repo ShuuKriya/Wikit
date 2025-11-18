@@ -12,7 +12,7 @@ No external APIs or proprietary datasets were used. All data sources are openly 
 
 ## 1. Overview
 
-The dataset consists of **1000 total transaction samples**, covering seven spending categories typically present in financial applications.
+The dataset consists of **1002 total transaction samples**, covering seven spending categories typically present in financial applications.
 
 Categories included:
 

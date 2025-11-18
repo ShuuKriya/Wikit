@@ -116,5 +116,5 @@ if __name__ == "__main__":
         else:
             print(f"Category not found: {args.remove}")
 
-    # Always print final state
+    # final state
     print_taxonomy()

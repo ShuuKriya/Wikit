@@ -111,7 +111,7 @@ def predict_single(raw_text: str):
     pred = model.classes_[idx]
     conf = float(confs[idx])
 
-    # explanation tokens (top positive coefficients for predicted class)
+
     feature_names = vectorizer.get_feature_names_out()
     coefs = model.coef_[idx]
     top_idx = np.argsort(coefs)[-5:][::-1]
@@ -188,7 +188,7 @@ with tabs[0]:
     # ----------------------------------------
     with col1:
 
-        # Handle prediction click
+
         if st.button("Predict", key="single_predict"):
             if not text.strip():
                 st.error("Type a transaction string first.")
@@ -197,7 +197,7 @@ with tabs[0]:
                 st.session_state.single_input = text
                 st.session_state.single_output = predict_single(text)
 
-        # If prediction exists → show it
+
         if "single_output" in st.session_state:
             out = st.session_state.single_output
 
@@ -269,7 +269,7 @@ with tabs[0]:
                     else:
                         fb_row.to_csv(fb_path, index=False)
 
-                    # Update memory small-scale override
+
                     if out["merchant"]:
                         mem = load_json(MEMORY_PATH, default={})
                         mem[out["merchant"].lower()] = corrected
@@ -293,7 +293,7 @@ with tabs[1]:
 
     uploaded = st.file_uploader("Upload CSV file", type=["csv"], key="batch_upload")
 
-    # Session state for batch predictions
+
     if "batch_output" not in st.session_state:
         st.session_state.batch_output = None
 
@@ -318,7 +318,7 @@ with tabs[1]:
                     with st.spinner("Running batch predictions..."):
                         out_df = predict_batch(df)
 
-                    # Save for explainability
+
                     st.session_state.batch_output = out_df
 
                     st.subheader("Results")
@@ -522,7 +522,7 @@ with tabs[3]:
         if process.returncode == 0:
             st.success(" Model refreshed successfully!")
 
-            # Reload updated model
+
             model = joblib.load(MODEL_PATH)
             vectorizer = joblib.load(VEC_PATH)
 

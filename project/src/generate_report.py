@@ -12,14 +12,14 @@ import json
 import subprocess
 from pathlib import Path
 
-# make sure project/src is importable for explain.py / utils
+
 sys.path.append(str(Path("project/src").resolve()))
 
 BASE = Path("project")
 EVAL_DIR = BASE / "evaluation"
 EVAL_DIR.mkdir(parents=True, exist_ok=True)
 
-# expected outputs
+
 METRICS_JSON = EVAL_DIR / "metrics_report.json"
 PERF_JSON = EVAL_DIR / "performance_report.json"
 ROBUST_JSON = EVAL_DIR / "robustness_report.json"
@@ -63,13 +63,13 @@ def collect_explanations(sample_n=5):
         return []
 
     rows = df["transaction"].dropna().astype(str).tolist()
-    # pick first N distinct examples
+
     chosen = rows[:sample_n]
 
     explanations = []
-    # try programmatic import first
+
     try:
-        from explain import explain as explain_fn  # type: ignore
+        from explain import explain as explain_fn  
         for t in chosen:
             try:
                 out = explain_fn(t)
@@ -77,7 +77,7 @@ def collect_explanations(sample_n=5):
             except Exception as e:
                 explanations.append({"input": t, "error": str(e)})
     except Exception:
-        # fallback: call explain.py via subprocess and parse stdout
+
         for t in chosen:
             try:
                 proc = subprocess.run(
@@ -117,7 +117,7 @@ def generate_markdown(bundle: dict):
     if bundle.get("robustness"):
         lines.append("## Robustness\n")
         lines.append("```json")
-        # keep it short
+        
         rb_short = {
             "num_samples": bundle["robustness"].get("num_samples"),
             "robustness_score": bundle["robustness"].get("robustness_score"),
@@ -135,7 +135,7 @@ def generate_markdown(bundle: dict):
             lines.append(f"- Prediction: **{ex.get('prediction')}**")
             lines.append(f"- Confidence: `{ex.get('confidence')}`")
             lines.append("```json")
-            # include token_importance but keep it readable
+
             ti = ex.get("token_importance", {})
             lines.append(json.dumps(ti, indent=2))
             lines.append("```")
@@ -144,20 +144,20 @@ def generate_markdown(bundle: dict):
     return "\n".join(lines)
 
 def main():
-    # 1) ensure evaluation etc. outputs exist (run scripts if needed)
+
     run_script_if_missing("evaluate", SCRIPTS["evaluate"], [METRICS_JSON, CM_PNG])
     run_script_if_missing("performance", SCRIPTS["performance"], [PERF_JSON])
     run_script_if_missing("robustness", SCRIPTS["robustness"], [ROBUST_JSON])
 
-    # 2) load outputs
+
     metrics = safe_load_json(METRICS_JSON)
     performance = safe_load_json(PERF_JSON)
     robustness = safe_load_json(ROBUST_JSON)
 
-    # 3) collect explanations
+
     explanations = collect_explanations(sample_n=5)
 
-    # 4) bundle & save JSON
+
     bundle = {
         "metrics": metrics,
         "performance": performance,
@@ -167,7 +167,7 @@ def main():
     FINAL_JSON.write_text(json.dumps(bundle, indent=2), encoding="utf-8")
     print(f"[report] Wrote final JSON → {FINAL_JSON}")
 
-    # 5) produce markdown
+
     md = generate_markdown(bundle)
     FINAL_MD.write_text(md, encoding="utf-8")
     print(f"[report] Wrote final markdown → {FINAL_MD}")

@@ -36,7 +36,7 @@ def train_model():
     print("Preprocessing test data...")
     test_df = preprocess_dataframe(test_df, text_col=TEXT_COL, norm_table_path=NORM_PATH)
 
-    # Use cleaned_text + merchant_normalized as features
+    # cleaned_text + merchant_normalized as features
     train_text = (train_df["cleaned_text"].fillna("") + " " +
                   train_df["merchant_normalized"].fillna(""))
     test_text = (test_df["cleaned_text"].fillna("") + " " +
@@ -71,7 +71,7 @@ def train_model():
     print(f"\nModel saved to: {MODEL_PATH}")
     print(f"Vectorizer saved to: {VECTORIZER_PATH}")
 
-    # show some example predictions
+    # some example predictions
     print("\nSample predictions:")
     for i in range(min(5, len(test_df))):
         print(f"Text: {test_df[TEXT_COL].iloc[i]}")
