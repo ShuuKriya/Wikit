@@ -205,7 +205,7 @@ Outputs:
 
 | Metric | Value |
 | :--- | :--- |
-| **Total samples** | 1000 |
+| **Total samples** | 1002 |
 | **Train** | 650 |
 | **Test** | 352 |
 
