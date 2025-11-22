@@ -170,14 +170,12 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Launch UI:
+Launch UI with saved model or retrain first:
 ```
 streamlit run project/ui/app.py
-
 ```
-⸻
 
-Re-training
+## Re-training
 
 Base training:
 ```
@@ -186,11 +184,10 @@ python3 project/src/train.py
 Human-feedback retraining:
 ```
 python3 project/src/retrain.py
-
 ```
-⸻
 
-Evaluation
+
+Evaluation:
 ```
 python3 project/src/evaluate.py
 ```
@@ -198,7 +195,20 @@ Outputs:
 	•	evaluation/metrics_report.json
 	•	evaluation/confusion_matrix.png
 
-⸻
+## CLI commands
+
+Predict single text input:
+```
+python3 project/src/predict.py --text "amzn trsn id 1234"
+```
+Predict batch (csv file):
+```
+python3 project/src/predict.py --batch "csv_filepath"
+```
+
+
+
+
 ## Dataset Summary 
 
 | Metric | Value |
