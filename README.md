@@ -86,14 +86,12 @@ Token-level insights including:
 
 # Documentation
 
-- `docs/architecture.md`  
-- `docs/dataset.md`  
-- `docs/training_pipeline.md`  
-- `docs/model.md`  
-- `docs/explainability.md`  
-- `docs/feedback_loop.md`  
-- `docs/evaluation.md`  
-- `docs/ui.md`  
+
+- `docs/dataset.md`   
+- `docs/evaluation.md` 
+- `docs/explainability_bias_mitigation.md`  
+- `docs/model.md`   
+
 
 ---
 
