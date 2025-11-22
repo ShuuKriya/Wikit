@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.log
+
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# Environment Variables 
+.env
+.env.*
+
+# OS Files 
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Streamlit Cache
+.streamlit/cache/
+.streamlit/session_state/
