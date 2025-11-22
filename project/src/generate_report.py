@@ -97,7 +97,7 @@ def generate_markdown(bundle: dict):
     lines.append(f"- Performance file: `{PERF_JSON.relative_to(BASE)}`")
     lines.append(f"- Robustness file: `{ROBUST_JSON.relative_to(BASE)}`")
     lines.append("")
-    # classification summary (if present)
+    
     if bundle.get("metrics"):
         cr = bundle["metrics"].get("classification_report")
         if cr:

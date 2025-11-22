@@ -1,9 +1,6 @@
-# Evaluation script
 # project/src/evaluate.py
 
 
-
-# project/src/evaluate.py
 
 import os
 import json

@@ -20,7 +20,7 @@ NORM_PATH = "project/data/normalization.json"
 # -------------------------------
 def load_config():
     if not os.path.exists(CONFIG_PATH):
-        # sensible defaults if config missing
+        # defaults 
         return {
             "confidence_threshold": 0.60,
             "batch_low_confidence_behavior": "other",

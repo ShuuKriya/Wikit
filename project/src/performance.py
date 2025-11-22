@@ -45,7 +45,7 @@ def benchmark():
     print("Measuring latency...")
     sample = combined[0]
 
-    # Warm-up (avoid cold-start skew)
+  
     for _ in range(5):
         model.decision_function(vectorizer.transform([sample]))
 
@@ -59,7 +59,7 @@ def benchmark():
     avg_latency_ms = ((t1 - t0) / runs) * 1000
 
     # -------------------------
-    # THROUGHPUT (pred/s)
+    # THROUGHPUT
     # -------------------------
     print("Measuring throughput...")
     t0 = time.time()

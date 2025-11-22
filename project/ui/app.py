@@ -17,9 +17,7 @@ import pandas as pd
 import streamlit as st
 
 
-# -----------------------
-# Ensure src package is importable
-# -----------------------
+
 BASE = Path("project")
 SRC = (BASE / "src").resolve()
 if str(SRC) not in sys.path:
@@ -52,7 +50,7 @@ def save_json(path, obj):
     json.dump(obj, open(path, "w", encoding="utf-8"), indent=4)
 
 # -----------------------
-# Load model + vectorizer (fail early if missing)
+# Load model + vectorizer 
 # -----------------------
 try:
     model = joblib.load(MODEL_PATH)
@@ -193,7 +191,7 @@ with tabs[0]:
             if not text.strip():
                 st.error("Type a transaction string first.")
             else:
-                # Save in session state so feedback works
+
                 st.session_state.single_input = text
                 st.session_state.single_output = predict_single(text)
 
