@@ -1,7 +1,8 @@
 
 
 # WIKIT — AI-Based Financial Transaction Categorisation
-Local, explainable, customisable ML pipeline for classifying raw financial transaction strings.
+Developed by ShuuKriya (Nishant Bidhu).
+It is a local, explainable, customisable ML pipeline for classifying raw financial transaction strings.
 
 WIKIT is a fully in-house machine learning system that converts messy transaction text  
 (e.g., `"AMAZON PAY *ORDER"`, `"SWIGGY * FOOD"`, `"HP PETROL PUMP"`)  
@@ -251,7 +252,7 @@ python3 project/src/predict.py --batch "csv_filepath"
 
 ---
 
-## Checklist (PS Requirements) 
+## Checklist 
 
 This solution includes:
 
@@ -266,7 +267,3 @@ This solution includes:
 
 ---
 
-## Acknowledgements
-
-Developed by **Nishant Bidhu** and **Swati Nim**
-Created for **AnitaB.org India GHCI 25 Hackathon**
